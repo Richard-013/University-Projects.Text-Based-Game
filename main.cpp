@@ -105,7 +105,7 @@ class Player
         */
 };
 
-class Introduction
+class Introduction : public Player
 {
     public:
         Introduction()
@@ -113,17 +113,43 @@ class Introduction
 
         }
 
-        void playerCharacterSetup()
+        string getName()
         {
             char answer;
-            cout << "Welcome to the game" << endl;
-            cout << "Say, I don't know your name, would you tell me it? Y/N" << endl;
-            cin >> answer;
+            bool invalidAnswer = true;
+            int i = 0;
+            do
+            {
+                if( i == 0 )
+                {
+                    cout << "Welcome to the game" << endl;
+                    cout << "Say, I don't know your name, would you tell me it? Y/N" << endl;
+                    cin >> answer;
+                    i++;
+                }
+                else
+                {
+                    cout << "Oh, I don't really see why not, would you please tell me your name? Y/N" << endl;
+                    cin >> answer;
+                }
+
+                if( answer == 'y' || answer == 'Y')
+                {
+                    invalidAnswer = false;
+                }
+            } while( invalidAnswer );
+            cout << "Why thank you, so do tell me, what is your name?" << endl;
+            cin >> name;
+
+            return name;
         }
 };
 
 int main()
 {
     Player mainCharacter;
+    Introduction intro;
+    mainCharacter.name = intro.getName();
+    cout << mainCharacter.name << endl;
     return 0;
 }
