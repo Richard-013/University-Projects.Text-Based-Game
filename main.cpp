@@ -105,8 +105,13 @@ class Player
         */
 };
 
+class Introduction
+{
+
+};
+
 int main()
 {
-    cout << "Hello World!" << endl;
+    cout << "Welcome to the game" << endl;
     return 0;
 }
