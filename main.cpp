@@ -105,7 +105,7 @@ class Player
         */
 };
 
-class Introduction : public Player
+class Introduction
 {
     public:
         Introduction()
@@ -116,32 +116,34 @@ class Introduction : public Player
         string getName()
         {
             char answer;
+            string name;
             bool invalidAnswer = true;
             int i = 0;
             do
             {
-                if( i == 0 )
+                if( i == 0 )  // First time player is asked for their name
                 {
                     cout << "Welcome to the game" << endl;
                     cout << "Say, I don't know your name, would you tell me it? Y/N" << endl;
                     cin >> answer;
                     i++;
                 }
-                else
+                else  // Every time after the first that the player is asked for their name
                 {
                     cout << "Oh, I don't really see why not, would you please tell me your name? Y/N" << endl;
                     cin >> answer;
                 }
 
-                if( answer == 'y' || answer == 'Y')
+                if( answer == 'y' || answer == 'Y')  // Breaks the loop once the user has agreed to give their name
                 {
                     invalidAnswer = false;
                 }
             } while( invalidAnswer );
-            cout << "Why thank you, so do tell me, what is your name?" << endl;
-            cin >> name;
 
-            return name;
+            cout << "Why thank you, so do tell me, what is your name?" << endl;
+            cin >> name;  // Takes the player's name
+
+            return name;  // Returns name so that it can be transferred into the Player class
         }
 };
 
@@ -149,7 +151,7 @@ int main()
 {
     Player mainCharacter;
     Introduction intro;
-    mainCharacter.name = intro.getName();
+    mainCharacter.name = intro.getName();  // Assigns name taken in Introduction class to the name variable stored in the Player class
     cout << mainCharacter.name << endl;
     return 0;
 }
