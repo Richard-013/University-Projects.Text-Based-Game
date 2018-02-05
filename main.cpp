@@ -145,6 +145,35 @@ class Introduction
 
             return name;  // Returns name so that it can be transferred into the Player class
         }
+
+        int chooseClass()
+        {
+            int answer;
+            bool invalidAnswer = true;
+            int i = 0;
+            do
+            {
+                if( i == 0 )  // First time player is asked for their name
+                {
+                    cout << "So, what is it that you do? Are you a:" << endl;
+                    cout << "  1 - Warrior\n  2 - Rogue\n  3 - Archer\n  4 - Mage" << endl;
+                    cin >> answer;
+                    i++;
+                }
+                else  // Every time after the first that the player is asked for their name
+                {
+                    cout << "Oh, could you please pick one of the choices I gave you, only there's no other options" << endl;
+                    cin >> answer;
+                }
+
+                if( answer == 1 || 2 || 3 || 4 )  // Breaks the loop once the user has agreed to give their name
+                {
+                    invalidAnswer = false;
+                }
+            } while( invalidAnswer );
+
+            return answer;
+        }
 };
 
 int main()
@@ -152,5 +181,6 @@ int main()
     Player mainCharacter;
     Introduction intro;
     mainCharacter.name = intro.getName();  // Assigns name taken in Introduction class to the name variable stored in the Player class
+    mainCharacter.setCharacterClass(intro.chooseClass());
     return 0;
 }
