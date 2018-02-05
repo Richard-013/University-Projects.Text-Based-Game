@@ -107,11 +107,23 @@ class Player
 
 class Introduction
 {
+    public:
+        Introduction()
+        {
 
+        }
+
+        void playerCharacterSetup()
+        {
+            char answer;
+            cout << "Welcome to the game" << endl;
+            cout << "Say, I don't know your name, would you tell me it? Y/N" << endl;
+            cin >> answer;
+        }
 };
 
 int main()
 {
-    cout << "Welcome to the game" << endl;
+    Player mainCharacter;
     return 0;
 }
