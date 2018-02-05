@@ -108,7 +108,7 @@ class Player
 class Introduction
 {
     public:
-        Introduction()
+        Introduction()  // Constructor for Introduction class
         {
 
         }
@@ -152,6 +152,5 @@ int main()
     Player mainCharacter;
     Introduction intro;
     mainCharacter.name = intro.getName();  // Assigns name taken in Introduction class to the name variable stored in the Player class
-    cout << mainCharacter.name << endl;
     return 0;
 }
