@@ -16,6 +16,7 @@ class Player
 
         // The following defines the player's starting stats
         string characterClass = "Villager";
+        int gender;  // Gender: 1 is male, 2 is female
         int level = 1;
         int experience = 0;
         int health = 10;
@@ -147,6 +148,37 @@ class Introduction
             return name;  // Returns name so that it can be transferred into the Player class
         }
 
+
+        int chooseGender(string name)
+        {
+            int answer;
+            bool invalidAnswer = true;
+            int i = 0;
+            do
+            {
+                if( i == 0 )  // First time player is asked for their gender
+                {
+                    cout << "Ah, so, " + name + ", are you a:" << endl;
+                    cout << "  1 - Boy\n  2 - Girl" << endl;
+                    cin >> answer;
+                    i++;
+                }
+                else  // Every time after the first that the player is asked for their gender
+                {
+                    cout << "Oh, could you please pick one of the choices I gave you" << endl;
+                    cin >> answer;
+                }
+
+                if( answer == 1 || answer == 2 )  // Breaks the loop once the user has agreed to give their gender
+                {
+                    invalidAnswer = false;
+                }
+            } while( invalidAnswer );
+
+            return answer;
+        }
+
+
         int chooseClass()
         {
             int answer;
@@ -154,20 +186,20 @@ class Introduction
             int i = 0;
             do
             {
-                if( i == 0 )  // First time player is asked for their name
+                if( i == 0 )  // First time player is asked for their class
                 {
-                    cout << "So, what is it that you do? Are you a:" << endl;
+                    cout << "And what is it that you do again? Are you a:" << endl;
                     cout << "  1 - Warrior\n  2 - Rogue\n  3 - Archer\n  4 - Mage" << endl;
                     cin >> answer;
                     i++;
                 }
-                else  // Every time after the first that the player is asked for their name
+                else  // Every time after the first that the player is asked for their class
                 {
                     cout << "Oh, could you please pick one of the choices I gave you, only there's no other options" << endl;
                     cin >> answer;
                 }
 
-                if( answer == 1 || 2 || 3 || 4 )  // Breaks the loop once the user has agreed to give their name
+                if( answer == 1 || answer == 2 || answer == 3 || answer == 4 )  // Breaks the loop once the user has agreed to give their class
                 {
                     invalidAnswer = false;
                 }
@@ -182,6 +214,7 @@ int main()
     Player mainCharacter;
     Introduction intro;
     mainCharacter.name = intro.getName();  // Assigns name taken in Introduction class to the name variable stored in the Player class
-    mainCharacter.setCharacterClass(intro.chooseClass());
+    mainCharacter.gender = intro.chooseGender(mainCharacter.name);  // Assigns chosen gender to the attribute in the Player class
+    mainCharacter.setCharacterClass(intro.chooseClass());  // Takes the choice made by the player and sets their class and stats
     return 0;
 }
