@@ -10,7 +10,7 @@ Introduction::Introduction()
     // Constructor for Introduction class
 }
 
-string getName()
+string Introduction::getName()
 {
     char answer;
     string name;
@@ -44,7 +44,7 @@ string getName()
 }
 
 
-int chooseGender(string name)
+int Introduction::chooseGender(string name)
 {
     int answer;
     bool invalidAnswer = true;
@@ -74,7 +74,7 @@ int chooseGender(string name)
 }
 
 
-int chooseClass()
+int Introduction::chooseClass()
 {
     int answer;
     bool invalidAnswer = true;
