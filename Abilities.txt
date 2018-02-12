@@ -18,7 +18,7 @@ warrior:
 *passive ability:gain extra shield/defense every turn
 *active ability1:enrage to deal extra x damage
 *active ability2:shield bash(dash forward to slam the enemy with the shield)
-*active ability3:spin
+*active ability3:spin(AoE dmg)
 
 
 
@@ -27,3 +27,4 @@ rogue:
 *passive ability: always have the first strike in a battle
 *active ability1: backstab
 *active ability2: shadow kick
+*active ability3: fan of knives(AoE dmg)
