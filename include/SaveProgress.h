@@ -1,12 +1,14 @@
 #ifndef SAVEPROGRESS_H
 #define SAVEPROGRESS_H
 
+#include "Player.h"
+
 class SaveProgress
 {
     public:
         SaveProgress();
-        void firstSave();
-        void save();
+        void firstSave(Player playerObj);
+        void save(Player playerObj);
 
     protected:
 
