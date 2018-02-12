@@ -1,4 +1,5 @@
-Introduction:
+Introduction: Introduction will be a short scripted sequence which takes the player throught the character creation system and a couple of practice fights before letting them
+	      explore the world for themselves
 
 Player starts as a villager and meets an old man that tells him about the (Whatever creature the boss is) that is living in the (centre?) of the map
 
