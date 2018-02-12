@@ -1,0 +1,32 @@
+mage:
+*active ability1: fireball
+*passive ability: gain extra intellect(?) to power up extra abilities(for the next x? turns)
+*active ability2: ice cone(make your character immune to any damage for the next turn)
+
+
+
+archer:
+*active ability1: put poison on arrows(lasts x? turns)
+*active ability2: rain with arrows(AoE damage)
+*passive ability: chance to crit(x? depending on level+ .. )
+
+
+
+
+
+
+
+warrior:
+*passive ability:gain extra shield/defense every turn
+*active ability1:enrage to deal extra x damage
+*active ability2:shield bash(dash forward to slam the enemy with the shield)
+*active ability3:spin
+
+
+
+
+
+rogue:
+*passive ability: always have the first strike in a battle
+*active ability1: backstab
+*active ability2: 
