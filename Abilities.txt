@@ -14,8 +14,6 @@ archer:
 
 
 
-
-
 warrior:
 *passive ability:gain extra shield/defense every turn
 *active ability1:enrage to deal extra x damage
@@ -25,8 +23,7 @@ warrior:
 
 
 
-
 rogue:
 *passive ability: always have the first strike in a battle
 *active ability1: backstab
-*active ability2: 
+*active ability2: shadow kick
