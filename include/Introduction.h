@@ -11,6 +11,7 @@ class Introduction
         string getName();
         int chooseGender(string name);
         int chooseClass();
+        void gameBegin();
 
     protected:
 
