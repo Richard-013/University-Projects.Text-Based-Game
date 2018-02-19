@@ -1,0 +1,11 @@
+Assigning player saveID -
+	During first save count the number of records in the CharacterData table and then add 1 to get saveID
+
+Storing saveID in the game -
+	First creation: Store as a variable in the game
+	Other times: Take from database when player loads the game and set a boolean variable at the same time so the game knows to overwrite previous data and not
+		     create a new save file/set of data for a player that already exists in the system
+
+Saving player data -
+	First: Create a new saveID for the player and add all current information to the player's database entry saving their character details in the CharacterData
+	       table and their world information (position and progress etc) in the WorldState table
