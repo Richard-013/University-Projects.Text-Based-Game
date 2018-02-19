@@ -1,48 +1,114 @@
 #include <iostream>
 #include <string>
 using namespace std;
-struct item{
-    string name;
+
+class Item {
+    // private:
+        string name = "";
+        int level = 0;
+    
+    public:
+        string getName();
+        void setName(string n);
+        int getLevel();
+        void levelingUp();
 };
-int main() {
-    item items[10];
-    for(int i=0; i<10; i++){
-        items[i].name= " ";
+
+string Item::getName(){
+    return name;
+}
+
+void Item::setName(string n) {
+    name = n;
+}
+
+int Item::getLevel(){
+    return level;
+}
+
+
+void Item::levelingUp() {
+    level = level + 1;
+}
+
+int countItems = 0;
+Item items[10];
+
+
+void addItem(){
+    string name;
+    cout << "Enter item name:";
+    cin >> name;
+    items[countItems].setName(name);
+    countItems++;
+}
+
+void deleteItem(){
+    cout << "What item do you want to drop?";
+    for (int i = 0; i <countItems; i ++) {
+        cout << endl << i + 1 << "-" << items [i] .getName() << endl;
     }
+    int num;
+    cin >> num;
+    int index = num-1;
+    
+    if (index>=0&&index<countItems) {
+        for(int i = index; i < countItems-1; i++) {
+            items[i].setName(items[i+1].getName());
+        }
+        items[countItems-1].setName("");
+        countItems--;
+    } else {
+        cout<<"Empty slot. \n";
+    }
+}
+
+void levelUpItem(){
+    cout << "What item do you want to level up?";
+    for (int i = 0; i <countItems; i ++) {
+        cout << endl << i + 1 << "-" << items [i] .getName() << endl;
+    }
+    int num;
+    cin >> num;
+    int index = num-1;
+    
+    if (index>=0&&index<countItems) {
+        items[index].levelingUp();
+    } else {
+        cout<<"Empty slot. \n";
+    }
+}
+
+
+
+int main () {
+    
+
     int choice;
     int index;
-    string name;
-    while(true) {
-        cout<<"Your Inventory: ";
-        for(int i=0; i<10; i++){
-            cout<<endl<<items[i].name<<endl;
-        }
-        cout<<"\n1: Add item\n";
-        cout<<"2: Drop item\n";
-        cin>>choice;
-        switch (choice){
+    
+    
+    while (true) {
+        cout << "Your Inventory:";
+        if(countItems==0) cout<<"\nThere are no items in Inventory";
+        else
+            for (int i = 0; i <countItems; i ++) {
+                cout << endl << items[i].getName() << " level: "<< items[i].getLevel()<< endl;
+            }
+        cout << "\n1: Add item \n";
+        cout << "2: Drop item \n";
+        cout << "3: Level up some item \n";
+        cin >> choice;
+        switch (choice) {
             case 1:
-                cout<<"Enter item name:";
-                cin>>name;
-                for(int i=0; i<10; i++){
-                    if(items[i].name==" "){
-                        items[i].name=name;
-                        break;
-                    }
-                }
+                addItem();
                 break;
             case 2:
-                 cout<<"What items do you want to drop?";
-                 for(int i=0; i<10;i++){
-                     cout<<endl<<i<<"-"<<items[i].name<<endl;
-                 }
-                 cin>>index;
-                 if(items[index].name==" "){
-                     cout<<"Empty slot.\n";
-                     break;
-                 }
-                 items[index].name=" ";
+                deleteItem();
+                break;
+            case 3: 
+                 levelUpItem();
                  break;
-          }
+        }
     }
 }
