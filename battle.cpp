@@ -5,7 +5,7 @@ using namespace std;
 
 
 void battle() //battle function will eventually take enemy ID as argument
-{
+{ int turn = 0;	
     cout << "Select a battle option" << endl;
 	cout << "1 - Basic Attack" << endl;
 	cout << "2 - Ability" << endl;
@@ -19,7 +19,8 @@ void battle() //battle function will eventually take enemy ID as argument
 	cin >> choice;
 	switch (choice){
 	case 1:
-	    {hit = rand() % 100+1;
+	{	turn = turn + 1;
+		hit = rand() % 100+1;
 	    if(hitChance >= hit){
         //pseudo code: mobHP = mobHP - wpnatk - 1.4*attack
 		//if PC == RANGED: mobHP = mobHP - wpnatk + 1.2*dexterity
@@ -30,10 +31,14 @@ void battle() //battle function will eventually take enemy ID as argument
 		}
 		break;}
 	case 2:
+	{	turn = turn + 1;
 		cout << "Ability" << endl;
 		//pseudo code: mobHP = mobHP - abilitydmg - 1.3*level - 1.4*main stat
 		break;
+	}
 	case 3:
+	{
+	turn = turn + 1;
         hit = rand() % 100+1;
 	    if(mageHitChance >= hit){
         //pseudo code: mobHP = mobHP - magicdmg - 1.6*intelligence
@@ -43,7 +48,10 @@ void battle() //battle function will eventually take enemy ID as argument
         cout << "You missed!" << endl;
 		}
 		break;
+	}
 	case 4:
+	{
+	turn = turn + 1;
 	    /*
 	    string itemChoice;
 	    SELECT itemName FROM inventory WHERE usable = 1;
@@ -53,6 +61,7 @@ void battle() //battle function will eventually take enemy ID as argument
         cin >> itemChoice;
 		break;
 		*/
+	}
     default:
         cout << "Invalid choice!" << endl;
         continue;
@@ -67,4 +76,3 @@ int main()
 {
 	battle();
 }
-
