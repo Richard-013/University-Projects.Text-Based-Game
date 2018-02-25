@@ -30,6 +30,7 @@ case 4:
     if(chance==1){
     //terminateenemy
     }
+ break;
 }
 
 
