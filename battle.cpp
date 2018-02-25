@@ -1,11 +1,13 @@
 #include <iostream>
 #include <cstdlib>
+#include "passive-output.cpp"
 
 using namespace std;
 
 
 void battle() //battle function will eventually take enemy ID as argument
-{ int turn = 0;	
+{ int turn = 0;
+    passive();
     cout << "Select a battle option" << endl;
 	cout << "1 - Basic Attack" << endl;
 	cout << "2 - Ability" << endl;
