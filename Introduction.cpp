@@ -28,7 +28,7 @@ void Introduction::gameBegin()
     cout << "to the centre of the village." << endl;
 }
 
-string Introduction::getName()
+string Introduction::chooseName()
 {
     char answer;
     string name;
