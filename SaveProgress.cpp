@@ -33,7 +33,7 @@ void SaveProgress::firstSave()
     }
 }
 
-int SaveProgress::assignPlayerID()
+int SaveProgress::assignCharacterID()
 {
     string databaseFile = "RPGDatabase.db";
 
@@ -47,9 +47,9 @@ int SaveProgress::assignPlayerID()
         cur->prepare();
         cur->step();
 
-        int playerID = cur->get_int(0);
-        playerID =+ 1;
-        return playerID;
+        int characterID = cur->get_int(0);
+        characterID =+ 1;
+        return characterID;
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
@@ -59,5 +59,10 @@ int SaveProgress::assignPlayerID()
 
 void SaveProgress::save(Player playerObj)
 {
+	//Same SQL as firstSave function but without running the assignCharacterID function
+}
 
+void SaveProgress::load(Player playerObj, int characterID)
+{
+	//SQL to take player stats from database
 }
