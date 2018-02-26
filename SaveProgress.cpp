@@ -11,7 +11,7 @@ SaveProgress::SaveProgress()
     //ctor
 }
 
-//void SaveProgress::firstSave(Player playerObj)
+//void SaveProgress::firstSave(Player playerObj)  // Runs when it is the first time the player has saved the game
 void SaveProgress::firstSave()
 {
     string databaseFile = "RPGDatabase.db";
@@ -22,8 +22,8 @@ void SaveProgress::firstSave()
         sqlite::sqlite db( databaseFile );
         auto cur = db.get_statement();
         
-        cur->set_sql( "INSERT INTO CharacterData (CharacterID, CharacterName, CharacterGender, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
-                      "VALUES (1, \"Harry\", 'M', 2, 12, 480, 20, 19, 7, 7, 7, 7, 7);" );
+        cur->set_sql( "INSERT INTO CharacterData (CharacterID, CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
+                      "VALUES (1, \"Harry\", 2, 12, 480, 20, 19, 7, 7, 7, 7, 7);" );
         cur->prepare();
         cur->step();
     }
@@ -33,7 +33,7 @@ void SaveProgress::firstSave()
     }
 }
 
-int SaveProgress::assignCharacterID()
+int SaveProgress::assignCharacterID()  // Assigns the player a unique characterID for their save
 {
     string databaseFile = "RPGDatabase.db";
 
@@ -57,12 +57,12 @@ int SaveProgress::assignCharacterID()
     }
 }
 
-void SaveProgress::save(Player playerObj)
+void SaveProgress::save(Player playerObj)  // Saves the player's progress (used after the first save)
 {
 	//Same SQL as firstSave function but without running the assignCharacterID function
 }
 
-void SaveProgress::load(Player playerObj, int characterID)
+void SaveProgress::load(Player playerObj, int characterID)  // Allows the player to load their progress from the information stored in the database
 {
 	//SQL to take player stats from database
 }

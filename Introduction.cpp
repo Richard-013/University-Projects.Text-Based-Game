@@ -10,7 +10,7 @@ Introduction::Introduction()
     // Constructor for Introduction class
 }
 
-void Introduction::gameBegin()
+void Introduction::gameBegin()  // Starts the game/introduction sequence
 {
     cout << "You awake with a sore back after a restless night of sleep in your uncomfortable bed." << endl;
     cout << "You pull yourself out of the bed with some effort, trying to stretch out the aches" << endl;
@@ -28,7 +28,7 @@ void Introduction::gameBegin()
     cout << "to the centre of the village." << endl;
 }
 
-string Introduction::chooseName()
+string Introduction::chooseName()  // Allows the player to choose their own name
 {
     char answer;
     string name;
@@ -62,7 +62,7 @@ string Introduction::chooseName()
 }
 
 
-int Introduction::chooseGender(string name)
+int Introduction::chooseGender(string name)  // Allows the player to choose their gender
 {
     int answer;
     bool invalidAnswer = true;
@@ -92,7 +92,7 @@ int Introduction::chooseGender(string name)
 }
 
 
-int Introduction::chooseClass()
+int Introduction::chooseClass()  // Allows the player to choose their class
 {
     int answer;
     bool invalidAnswer = true;

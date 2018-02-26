@@ -9,10 +9,9 @@ class Player
         Player();
         void setCharacterClass(int classChoice);
 
+		// The following defines the player's starting stats and default values
         std::string name = "Harry";
-        // The following defines the player's starting stats
         std::string characterClass = "Villager";
-        int gender = 1;  // Gender: 1 is male, 2 is female
         int level = 1;
         int experience = 0;
         int health = 10;
@@ -21,7 +20,7 @@ class Player
         int intelligence = 3;
         int perception = 3;
         int dexterity = 3;
-        int classID = 0;  // Use this to reference player class as it is easier to evaluate integers accurately
+        int classID = 1;  // Use this to reference player class as it is easier to evaluate integers accurately
 
     protected:
 

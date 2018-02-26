@@ -12,7 +12,7 @@ Player::Player()
 
 void Player::setCharacterClass(int classChoice) // Sets character class based upon player choice
 {
-    switch( classChoice )
+    switch( classChoice )  // Switch statement to set character attributes based on their chosen class
     {
         case 1:
             classID = 1;
