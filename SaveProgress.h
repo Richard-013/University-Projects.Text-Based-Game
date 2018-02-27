@@ -10,7 +10,7 @@ class SaveProgress
         //void firstSave(Player playerObj);
         void firstSave();
         void save(Player playerObj);
-        int assignPlayerID();
+        int assignCharacterID();
 		void load(Player playerObj, int characterID);
 
     protected:

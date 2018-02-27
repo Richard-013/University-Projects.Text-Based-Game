@@ -2,7 +2,7 @@
 #include <string>
 #include "SaveProgress.h"
 #include "Player.h"
-#include "../libsqlite.hpp"
+#include "libsqlite.hpp"
 
 using namespace std;
 
@@ -16,16 +16,16 @@ void SaveProgress::firstSave()
 {
     string databaseFile = "RPGDatabase.db";
 
-    int playerID = assignPlayerID();
+    int characterID = assignCharacterID();
     try
     {
         sqlite::sqlite db( databaseFile );
         auto cur = db.get_statement();
         
-        cur->set_sql( "INSERT INTO CharacterData (CharacterID, CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
-                      "VALUES (1, \"Harry\", 2, 12, 480, 20, 19, 7, 7, 7, 7, 7);" );
+        cur->set_sql( "insert into CharacterData (CharacterID, CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
+                      "values (4, \"Mary\", 2, 12, 480, 20, 19, 7, 7, 7, 7, 7);" );
         cur->prepare();
-        cur->step();
+		cur->step();
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
