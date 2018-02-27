@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../libsqlite.hpp"
+#include "libsqlite.hpp"
 #include "SaveProgress.h"
 
 using namespace std;
@@ -15,12 +15,21 @@ int main()
         auto cur = db.get_statement();
         
         
-        cur->set_sql( "SELECT count(*) "
-					  "FROM CharacterData " );
+        cur->set_sql( "select * "
+                      "from CharacterData " );
         cur->prepare();
         cur->step();
-		int count = cur->get_int(0);
-		cout << count << endl;
+		string name = cur->get_text(1);
+		cout << name << endl;
+		cur->step();
+		name = cur->get_text(1);
+		cout << name << endl;
+		cur->step();
+		name = cur->get_text(1);
+		cout << name << endl;
+		cur->step();
+		name = cur->get_text(1);
+		cout << name << endl;
 			
 		/*
         auto a = cur->step();
@@ -30,6 +39,8 @@ int main()
           a = cur->step();
         } while( a );
 		*/
+		SaveProgress sp;
+		sp.firstSave();
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
