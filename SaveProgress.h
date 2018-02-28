@@ -7,10 +7,8 @@ class SaveProgress
 {
     public:
         SaveProgress();
-        //void firstSave(Player playerObj);
-        void firstSave();
+        void firstSave(Player playerObj);
         void save(Player playerObj);
-        int assignCharacterID();
 		void load(Player playerObj, int characterID);
 
     protected:

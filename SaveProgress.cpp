@@ -11,45 +11,30 @@ SaveProgress::SaveProgress()
     //ctor
 }
 
-//void SaveProgress::firstSave(Player playerObj)  // Runs when it is the first time the player has saved the game
-void SaveProgress::firstSave()
+void SaveProgress::firstSave(Player playerObj)  // Runs when it is the first time the player has saved the game
 {
     string databaseFile = "RPGDatabase.db";
 
-    int characterID = assignCharacterID();
     try
     {
         sqlite::sqlite db( databaseFile );
         auto cur = db.get_statement();
-        
-        cur->set_sql( "insert into CharacterData (CharacterID, CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
-                      "values (4, \"Mary\", 2, 12, 480, 20, 19, 7, 7, 7, 7, 7);" );
-        cur->prepare();
+		
+        cur->set_sql( "insert into CharacterData ( CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
+                      "values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? );" );
+		cur->prepare();
+		cur->bind( 1, playerObj.name );
+		cur->bind( 2, playerObj.classID );
+		cur->bind( 3, playerObj.level );
+		cur->bind( 4, playerObj.experience );
+		cur->bind( 5, playerObj.health );
+		cur->bind( 6, playerObj.health );
+		cur->bind( 7, playerObj.attack );
+		cur->bind( 8, playerObj.defence );
+		cur->bind( 9, playerObj.intelligence );
+		cur->bind( 10, playerObj.perception );
+		cur->bind( 11, playerObj.dexterity );
 		cur->step();
-    }
-    catch( sqlite::exception e )      // catch all sql issues
-    {
-        cerr << e.what() << endl;
-    }
-}
-
-int SaveProgress::assignCharacterID()  // Assigns the player a unique characterID for their save
-{
-    string databaseFile = "RPGDatabase.db";
-
-    try
-    {
-        sqlite::sqlite db( databaseFile );
-        auto cur = db.get_statement(); 
-
-        cur->set_sql( "select count(*) "
-                      "from CharacterData" );
-        cur->prepare();
-        cur->step();
-
-        int characterID = cur->get_int(0);
-        characterID =+ 1;
-        return characterID;
     }
     catch( sqlite::exception e )      // catch all sql issues
     {

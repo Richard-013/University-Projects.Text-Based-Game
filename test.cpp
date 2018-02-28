@@ -2,6 +2,7 @@
 #include <string>
 #include "libsqlite.hpp"
 #include "SaveProgress.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ int main()
 
     try
     {
+		/*
         sqlite::sqlite db( sqliteFile );
         auto cur = db.get_statement();
         
@@ -30,6 +32,9 @@ int main()
 		cur->step();
 		name = cur->get_text(1);
 		cout << name << endl;
+		cur->step();
+		name = cur->get_text(1);
+		cout << name << endl;
 			
 		/*
         auto a = cur->step();
@@ -39,8 +44,9 @@ int main()
           a = cur->step();
         } while( a );
 		*/
+		Player player;
 		SaveProgress sp;
-		sp.firstSave();
+		sp.firstSave(player);
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
