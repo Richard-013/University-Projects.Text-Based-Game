@@ -20,8 +20,8 @@ void SaveProgress::firstSave(Player playerObj)  // Runs when it is the first tim
         sqlite::sqlite db( databaseFile );
         auto cur = db.get_statement();
 		
-        cur->set_sql( "insert into CharacterData ( CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
-                      "values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? );" );
+        cur->set_sql( "INSERT INTO CharacterData ( CharacterName, CharacterClassID, CharacterLevel, CharacterExperience, CharacterHealth, CharacterRemainingHealth, CharacterAttack, CharacterDefence, CharacterIntelligence, CharacterPerception, CharacterDexterity) "
+                      "VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? );" );
 		cur->prepare();
 		cur->bind( 1, playerObj.name );
 		cur->bind( 2, playerObj.classID );
@@ -35,6 +35,30 @@ void SaveProgress::firstSave(Player playerObj)  // Runs when it is the first tim
 		cur->bind( 10, playerObj.perception );
 		cur->bind( 11, playerObj.dexterity );
 		cur->step();
+
+		setCharacterID(playerObj);
+    }
+    catch( sqlite::exception e )      // catch all sql issues
+    {
+        cerr << e.what() << endl;
+    }
+}
+
+void SaveProgress::setCharacterID(Player playerObj)
+{
+
+	string databaseFile = "RPGDatabase.db";
+
+    try
+    {
+        sqlite::sqlite db( databaseFile );
+        auto cur = db.get_statement();
+		
+        cur->set_sql( "SELECT MAX(CharacterID) "
+					  "FROM CharacterData ");
+		cur->prepare();
+		cur->step();
+		playerObj.characterID = cur->get_int(0);
     }
     catch( sqlite::exception e )      // catch all sql issues
     {

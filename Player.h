@@ -21,6 +21,7 @@ class Player
         int perception = 3;
         int dexterity = 3;
         int classID = 0;  // Use this to reference player class as it is easier to evaluate integers accurately
+		int characterID;
 
     protected:
 
