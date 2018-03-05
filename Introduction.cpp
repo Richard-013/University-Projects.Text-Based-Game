@@ -10,8 +10,9 @@ Introduction::Introduction()
     // Constructor for Introduction class
 }
 
-void Introduction::gameBegin()  // Starts the game/introduction sequence
+void Introduction::gameBegin(Player &playerObj)  // Starts the introduction sequence
 {
+	/* Possible start to game story
     cout << "You awake with a sore back after a restless night of sleep in your uncomfortable bed." << endl;
     cout << "You pull yourself out of the bed with some effort, trying to stretch out the aches" << endl;
     cout << "left behind by the slowly breaking wooden slats of your bed." << endl;
@@ -26,6 +27,26 @@ void Introduction::gameBegin()  // Starts the game/introduction sequence
     cout << "setting up market stalls, hanging clothes to dry, and just about anything else that" << endl;
     cout << "townspeople did. You greet familiar faces as you walk down the dirt road that leads" << endl;
     cout << "to the centre of the village." << endl;
+	*/
+	
+	// Character Creation
+	playerObj.name = chooseName();
+	playerObj.classID = chooseClass();
+	switch( playerObj.classID )
+	{
+		case 1:
+			playerObj.characterClass = "Warrior";
+			break;
+		case 2:
+			playerObj.characterClass = "Rogue";
+			break;
+		case 3:
+			playerObj.characterClass = "Archer";
+			break;
+		case 4:
+			playerObj.characterClass = "Mage";
+			break;
+	}
 }
 
 string Introduction::chooseName()  // Allows the player to choose their own name
@@ -60,37 +81,6 @@ string Introduction::chooseName()  // Allows the player to choose their own name
 
     return name;  // Returns name so that it can be transferred into the Player class
 }
-
-
-int Introduction::chooseGender(string name)  // Allows the player to choose their gender
-{
-    int answer;
-    bool invalidAnswer = true;
-    int i = 0;
-    do
-    {
-        if( i == 0 )  // First time player is asked for their gender
-        {
-            cout << "Ah, so, " + name + ", are you a:" << endl;
-            cout << "  1 - Boy\n  2 - Girl" << endl;
-            cin >> answer;
-            i++;
-        }
-        else  // Every time after the first that the player is asked for their gender
-        {
-            cout << "Oh, could you please pick one of the choices I gave you" << endl;
-            cin >> answer;
-        }
-
-        if( answer == 1 || answer == 2 )  // Breaks the loop once the user has agreed to give their gender
-        {
-            invalidAnswer = false;
-        }
-    } while( invalidAnswer );
-
-    return answer;
-}
-
 
 int Introduction::chooseClass()  // Allows the player to choose their class
 {

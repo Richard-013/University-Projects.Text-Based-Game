@@ -1,6 +1,7 @@
 #ifndef INTRODUCTION_H
 #define INTRODUCTION_H
 #include <string>
+#include "Player.h"
 
 using namespace std;
 
@@ -8,10 +9,9 @@ class Introduction
 {
     public:
         Introduction();
-        string getName();
-        int chooseGender(string name);
+        string chooseName();
         int chooseClass();
-        void gameBegin();
+        void gameBegin(Player &playerObj);
 
     protected:
 
