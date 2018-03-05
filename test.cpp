@@ -46,7 +46,10 @@ int main()
 		*/
 		Player player;
 		SaveProgress sp;
-		sp.firstSave(player);
+		//sp.firstSave(player);
+		sp.load(player, 15);
+		player.attack = player.attack + 3;
+		sp.save(player);
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
