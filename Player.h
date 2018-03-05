@@ -22,6 +22,7 @@ class Player
         int perception = 3;
         int dexterity = 3;
         int classID = 0;  // Use this to reference player class as it is easier to evaluate integers accurately
+						  // 0 is a villager, 1 is a warrior, 2 is a rogue, 3 is an archer, 4 is a mage, anything else is not valid
 		int characterID;
 		int checkpoint;
 

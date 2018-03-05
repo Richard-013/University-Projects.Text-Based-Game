@@ -36,7 +36,7 @@ void SaveProgress::firstSave(Player &playerObj)  // Runs when it is the first ti
 		cur->bind( 11, playerObj.dexterity );
 		cur->step();
 
-		setCharacterID(playerObj);
+		setCharacterID( playerObj );
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
