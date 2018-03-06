@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdexcept>
 #include "libsqlite.hpp"
 //#include "battle.h"
