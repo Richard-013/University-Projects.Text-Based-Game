@@ -24,7 +24,7 @@ using namespace std;
   int perception;
   int dexterity;
   int hitChance;
-  
+
   PlayerCharacter()
   {
     int id = 1;
@@ -46,7 +46,7 @@ using namespace std;
     int perception = cur->get_int(10);
     int dexterity = cur->get_int(11);
     int hitChance = 90;
-  
+
     cout << name << " " << playerClass << " " << level << " " << exp << " " << health << " " << remHealth << " " << attack << " " << defence << " " << intelligence << " " << perception << " " << dexterity << endl;
   }
 };*/
@@ -71,10 +71,10 @@ using namespace std;
 
 
 
-/*void battle(Player playerObj, Mob enemy, Item equipped) 
+/*void battle(Player playerObj, Mob enemy, Item equipped)
   //battle function takes player, mob and item objects as parameters
   //item object should be players equipped weapon
-{	
+{
 	  //int turn = 0;
     //passive();
 	cout << "Level " << Enemy.getLevel() << " " << Enemy.getName() << " appears!" << endl;
@@ -91,12 +91,12 @@ using namespace std;
 	cin >> choice;
 	switch (choice){
 	case 1:
-	{	
+	{
 		basic_attack();
 		break;
 	}
 	case 2:
-	{	
+	{
 		++turn;
 		cout << "Ability" << endl;
 		//ability-use();
@@ -106,7 +106,7 @@ using namespace std;
 	}
 	case 3:
 	{
-		
+
 		break;
 	}
 	case 4:
@@ -120,7 +120,7 @@ using namespace std;
         cout << "Choose an item" << endl;
         cin >> itemChoice;
 		break;
-		
+
 	}
     default:
         cout << "Invalid choice!" << endl;
@@ -128,16 +128,17 @@ using namespace std;
         }
 
 	}
-	
-	
+
+
 	/* ENEMY BATTLE PHASE GOES HERE*/
+	//reminder: after enemy battle phase if enraged==1 or poisoned==1 deal bosshp%10 dmg
+	//reminder: if skipTurn==1 end enemy battle phase
 
 //}
 
 
 void basic_attack(Player playerObj, Mob enemy, Item equipped)
-{
-		int hit = rand() % 100+1;
+{		int hit = rand() % 100+1;
 	  if(playerObj.hitChance >= hit) //If player rolls within his hit chance...
     {
       if (equipped.getRange > 0) //If the player is using a ranged weapon...
@@ -178,7 +179,7 @@ void magic(Player playerObj, Mob enemy)
         enemy.setHP(enemy.getHP() - incomingDamage);
 				cout << "Magic attack hits for "+incomingDamage << endl;
 			}
-			else 
+			else
 			{
 				cout << "You missed!" << endl;
 			}
@@ -191,6 +192,6 @@ void magic(Player playerObj, Mob enemy)
 
 int main()
 {
-  
+
   return 0;
 }
