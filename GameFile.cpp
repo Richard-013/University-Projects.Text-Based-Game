@@ -15,6 +15,7 @@ void gamePart2(Player &playerObj);
 void gamePart3(Player &playerObj);
 void gameFinale(Player &playerObj);
 void runWholeGame(Player &playerObj);
+void wantToSave(Player &playerObj);
 
 int main()
 {
@@ -22,7 +23,6 @@ int main()
 	do
 	{
 		Player playerObj;
-		SaveProgress saveProg;
 
 		int answer, loadID;
 		bool invalidAnswer = true;
@@ -62,6 +62,7 @@ int main()
 				// Loads player data
 				cout << "What is the ID of the character?" << endl;
 				cin >> loadID;
+				saveProg.firstTimeSaving = false;
 				saveProg.load(playerObj, loadID);
 			}
 			else if( answer == 3 )
@@ -132,23 +133,33 @@ int main()
 void gamePart1( Player &playerObj )
 {
 	// Part 1 of the game story
+	playerObj.checkpoint = 0;  // Sets the player's progress marker as 0 i.e. the start of the game
 	Introduction intro;
 	intro.gameBegin( playerObj );
+	wantToSave( playerObj );
 }
 
 void gamePart2( Player &playerObj )
 {
 	// Part 2 of the game story
+	playerObj.checkpoint = 1;  // Sets the player's progress marker as 1, so they have completed the start of the game
+	wantToSave( playerObj );
 }
 
 void gamePart3( Player &playerObj )
 {
 	// Part 3 of the game story
+	playerObj.checkpoint = 2;  // Sets the player's progress marker as 2, so they have completed the middle of the game
+	wantToSave( playerObj );
 }
 
 void gameFinale( Player &playerObj )
 {
 	// Endgame
+	playerObj.checkpoint = 3;  // Sets the player's progress marker as 3, so they hav completed most the game
+	// Finale code here
+	playerObj.checkpoint = 4;  // Sets the player's progress marker as 4, they have completed the game
+	wantToSave( playerObj );
 }
 
 void runWholeGame(Player &playerObj)
@@ -158,4 +169,33 @@ void runWholeGame(Player &playerObj)
 	gamePart2(playerObj);
 	gamePart3(playerObj);
 	gameFinale(playerObj);
+}
+
+void wantToSave(Player &playerObj)
+{
+	SaveProgress saveProg;
+	int answer;
+	bool invalidAnswer = true;
+	do
+	{
+		cout << "Would you like to save your progress?" << endl;
+		cout << "    1 - Yes\n    2 - No" << endl;
+		cin >> answer;
+		
+		if( answer == 1 || answer == 2 )
+		{
+			invalidAnswer = false;
+		}
+	} while( invalidAnswer );
+	
+	if( answer == 1 && firstTimeSaving )
+	{
+		saveProg.firstSave( Player &playerObj );
+		cout << endl << "Your characterID is " << playerObj.characterID << endl;
+		cout << "Please remember this in order to load your progress at a later date" << endl;
+	}
+	else if( answer == 1 && firstTimeSaving != true )
+	{
+		saveProg.save( Player &playerObj );
+	}
 }
