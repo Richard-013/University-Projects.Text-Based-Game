@@ -168,6 +168,5 @@ int SaveProgress::loadWorldState(int characterID)
     catch( sqlite::exception e )      // catch all sql issues
     {
         cerr << e.what() << endl;
-		return 99;  // Returns value that will end game loop
     }
 }
