@@ -32,21 +32,7 @@ void Introduction::gameBegin(Player &playerObj)  // Starts the introduction sequ
 	// Character Creation
 	playerObj.name = chooseName();
 	playerObj.classID = chooseClass();
-	switch( playerObj.classID )
-	{
-		case 1:
-			playerObj.characterClass = "Warrior";
-			break;
-		case 2:
-			playerObj.characterClass = "Rogue";
-			break;
-		case 3:
-			playerObj.characterClass = "Archer";
-			break;
-		case 4:
-			playerObj.characterClass = "Mage";
-			break;
-	}
+	playerObj.setCharacterClass(playerObj.classID);
 }
 
 string Introduction::chooseName()  // Allows the player to choose their own name
