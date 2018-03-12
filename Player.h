@@ -25,6 +25,7 @@ class Player
 						  // 0 is a villager, 1 is a warrior, 2 is a rogue, 3 is an archer, 4 is a mage, anything else is not valid
 		int characterID;
 		int checkpoint;
+		bool firstTimeSaving = true;  // This is used to tell the game which save function to run
 
     protected:
 

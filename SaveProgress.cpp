@@ -121,11 +121,53 @@ void SaveProgress::load(Player &playerObj, int characterID)  // Allows the playe
         playerObj.dexterity = cur->get_int(12);
         playerObj.classID = cur->get_int(3);
 		playerObj.characterID = cur->get_int(1);
-		// playerObj.checkpoint;
+		
+		playerObj.checkpoint = loadWorldState( characterID );
+		switch( playerObj.classID )
+		{
+			case 1:
+				playerObj.characterClass = "Warrior";
+				break;
+			case 2:
+				playerObj.characterClass = "Rogue";
+				break;
+			case 3:
+				playerObj.characterClass = "Archer";
+				break;
+			case 4:
+				playerObj.characterClass = "Mage";
+				break;
+			default:
+				playerObj.characterClass = "Villager";
+		}
 		string characterClass = "Villager"; // Make if statement	
     }
     catch( sqlite::exception e )      // catch all sql issues
     {
         cerr << e.what() << endl;
+    }
+}
+
+int SaveProgress::loadWorldState(int characterID)
+{
+	string databaseFile = "RPGDatabase.db";
+
+    try
+    {
+        sqlite::sqlite db( databaseFile );
+        auto cur = db.get_statement();
+		
+        cur->set_sql( "SELECT * FROM WorldState WHERE CharacterID = ?");
+		cur->prepare();
+		cur->bind( 1, characterID );
+		cur->step();
+		
+		checkpoint = cur->get_int(3);
+		return checkpoint;
+    }
+    catch( sqlite::exception e )      // catch all sql issues
+    {
+        cerr << e.what() << endl;
+		return 99;  // Returns value that will end game loop
     }
 }

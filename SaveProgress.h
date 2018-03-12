@@ -11,7 +11,7 @@ class SaveProgress
 		void setCharacterID(Player &playerObj);
         void save(Player &playerObj);
 		void load(Player &playerObj, int characterID);
-		
+		int loadWorldState(int characterID)
 
     protected:
 
