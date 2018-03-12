@@ -8,9 +8,10 @@ class Player
     public:
         Player();
         void setCharacterClass(int classChoice);
+		void setLevel();
 
 		// The following defines the player's starting stats and default values
-        std::string name = "Terry";
+        std::string name = "Gordon";
         std::string characterClass = "Villager";
         int level = 1;
         int experience = 0;
@@ -24,7 +25,7 @@ class Player
         int classID = 0;  // Use this to reference player class as it is easier to evaluate integers accurately
 						  // 0 is a villager, 1 is a warrior, 2 is a rogue, 3 is an archer, 4 is a mage, anything else is not valid
 		int characterID;
-		int checkpoint;
+		int checkpoint = 0;
 		bool firstTimeSaving = true;  // This is used to tell the game which save function to run
 
     protected:

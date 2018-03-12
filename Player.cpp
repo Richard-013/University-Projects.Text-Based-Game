@@ -59,6 +59,11 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
     }
 }
 
+void Player::setLevel()
+{
+	level = level + 1;
+}
+
 /*
 // Tests for Player class code
 Player mainCharacter;
