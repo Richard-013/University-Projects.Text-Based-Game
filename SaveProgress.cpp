@@ -162,7 +162,7 @@ int SaveProgress::loadWorldState(int characterID)
 		cur->bind( 1, characterID );
 		cur->step();
 		
-		checkpoint = cur->get_int(3);
+		int checkpoint = cur->get_int(3);
 		return checkpoint;
     }
     catch( sqlite::exception e )      // catch all sql issues
