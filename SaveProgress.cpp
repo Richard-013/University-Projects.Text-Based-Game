@@ -42,6 +42,31 @@ void SaveProgress::firstSave(Player &playerObj)  // Runs when it is the first ti
     {
         cerr << e.what() << endl;
     }
+	
+	firstSaveWorldState( playerObj );
+}
+
+void SaveProgress::firstSaveWorldState(Player &playerObj)
+{
+	string databaseFile = "RPGDatabase.db";
+
+    try
+    {
+        sqlite::sqlite db( databaseFile );
+        auto cur = db.get_statement();
+		
+        cur->set_sql( "INSERT INTO WorldState ( CharacterID, MainQuestProgress ) "
+                      "VALUES ( ? , ? );" );
+		cur->prepare();
+		cur->bind( 1, playerObj.characterID );
+		cur->bind( 2, playerObj.checkpoint );
+		cur->step();
+		
+    }
+    catch( sqlite::exception e )      // catch all sql issues
+    {
+        cerr << e.what() << endl;
+    }
 }
 
 void SaveProgress::setCharacterID(Player &playerObj)
@@ -65,7 +90,7 @@ void SaveProgress::setCharacterID(Player &playerObj)
     }
 }
 
-void SaveProgress::save(Player &playerObj)  // Saves the player's progress (used after the first save)
+void SaveProgress::save(Player playerObj)  // Saves the player's progress (used after the first save)
 {
 	string databaseFile = "RPGDatabase.db";
 
@@ -88,6 +113,30 @@ void SaveProgress::save(Player &playerObj)  // Saves the player's progress (used
 		cur->bind( 10, playerObj.dexterity );
 		cur->bind( 11, playerObj.characterID );
 		cur->step();
+    }
+    catch( sqlite::exception e )      // catch all sql issues
+    {
+        cerr << e.what() << endl;
+    }
+	
+	saveWorldState( playerObj );
+}
+
+void SaveProgress::saveWorldState(Player playerObj)
+{
+	string databaseFile = "RPGDatabase.db";
+
+    try
+    {
+        sqlite::sqlite db( databaseFile );
+        auto cur = db.get_statement();
+		
+        cur->set_sql( "UPDATE WorldState SET MainQuestProgress = ? WHERE CharacterID = ?;" );
+		cur->prepare();
+		cur->bind( 1, playerObj.checkpoint );
+		cur->bind( 2, playerObj.characterID );
+		cur->step();
+		
     }
     catch( sqlite::exception e )      // catch all sql issues
     {

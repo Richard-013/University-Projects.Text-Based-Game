@@ -46,10 +46,12 @@ int main()
 		*/
 		Player player;
 		SaveProgress sp;
-		//sp.firstSave(player);
-		sp.load(player, 15);
-		player.attack = player.attack + 3;
-		sp.save(player);
+		sp.load( player, 17 );
+		cout << player.level << endl;
+		player.setLevel();
+		cout << player.level << endl;
+		sp.save( player );
+		return 0;
     }
     catch( sqlite::exception e )      // catch all sql issues
     {

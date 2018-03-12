@@ -9,7 +9,9 @@ class SaveProgress
         SaveProgress();
         void firstSave(Player &playerObj);
 		void setCharacterID(Player &playerObj);
-        void save(Player &playerObj);
+		void firstSaveWorldState(Player &playerObj);
+        void save(Player playerObj);
+		void saveWorldState(Player playerObj);
 		void load(Player &playerObj, int characterID);
 		int loadWorldState(int characterID);
 
