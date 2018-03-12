@@ -23,6 +23,7 @@ int main()
 	do
 	{
 		Player playerObj;
+		SaveProgress saveProg;
 
 		int answer, loadID;
 		bool invalidAnswer = true;
@@ -188,14 +189,14 @@ void wantToSave(Player &playerObj)
 		}
 	} while( invalidAnswer );
 	
-	if( answer == 1 && firstTimeSaving )
+	if( answer == 1 && saveProg.firstTimeSaving )
 	{
-		saveProg.firstSave( Player &playerObj );
+		saveProg.firstSave( playerObj );
 		cout << endl << "Your characterID is " << playerObj.characterID << endl;
 		cout << "Please remember this in order to load your progress at a later date" << endl;
 	}
-	else if( answer == 1 && firstTimeSaving != true )
+	else if( answer == 1 && saveProg.firstTimeSaving != true )
 	{
-		saveProg.save( Player &playerObj );
+		saveProg.save( playerObj );
 	}
 }
