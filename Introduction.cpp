@@ -30,9 +30,9 @@ void Introduction::gameBegin(Player &playerObj)  // Starts the introduction sequ
 	*/
 	
 	// Character Creation
-	playerObj.name = chooseName();
-	playerObj.classID = chooseClass();
-	playerObj.setCharacterClass(playerObj.classID);
+	playerObj.name = chooseName();  // Takes the player through choosing their character's name
+	playerObj.classID = chooseClass();  // Takes the player through choosing their own class
+	playerObj.setCharacterClass(playerObj.classID);  // Sets the player's stats after they have chosen a class
 }
 
 string Introduction::chooseName()  // Allows the player to choose their own name

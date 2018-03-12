@@ -12,7 +12,6 @@ class SaveProgress
         void save(Player &playerObj);
 		void load(Player &playerObj, int characterID);
 		
-		bool firstTimeSaving = true;
 
     protected:
 

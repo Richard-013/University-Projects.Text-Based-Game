@@ -26,7 +26,7 @@ int main()
 		SaveProgress saveProg;
 
 		int answer, loadID;
-		bool invalidAnswer = true;
+		bool invalidAnswer = true;  // This variable is used to run loops that check for valid input
 
 		// Title Screen
 		cout << "################################################################" << endl;
@@ -63,7 +63,7 @@ int main()
 				// Loads player data
 				cout << "What is the ID of the character?" << endl;
 				cin >> loadID;
-				saveProg.firstTimeSaving = false;
+				playerObj.firstTimeSaving = false;
 				saveProg.load(playerObj, loadID);
 			}
 			else if( answer == 3 )
@@ -189,13 +189,13 @@ void wantToSave(Player &playerObj)
 		}
 	} while( invalidAnswer );
 	
-	if( answer == 1 && saveProg.firstTimeSaving )
+	if( answer == 1 && playerObj.firstTimeSaving )
 	{
 		saveProg.firstSave( playerObj );
 		cout << endl << "Your characterID is " << playerObj.characterID << endl;
 		cout << "Please remember this in order to load your progress at a later date" << endl;
 	}
-	else if( answer == 1 && saveProg.firstTimeSaving != true )
+	else if( answer == 1 && playerObj.firstTimeSaving != true )
 	{
 		saveProg.save( playerObj );
 	}
