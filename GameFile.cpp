@@ -18,7 +18,7 @@ void gameFinale(Player &playerObj);
 void runWholeGame(Player &playerObj);
 void wantToSave(Player &playerObj);
 
-int main()
+int main()  // Main function that runs the game
 {
 	bool runGame = true;  // This variable is used to let the player break the game loop and quit the game
 	do
@@ -45,7 +45,7 @@ int main()
 			cout << "    2 - Load a previous save" << endl;
 			cout << "    3 - Exit the game" << endl;
 
-			do
+			do  // Do-While loop to take input and check its validity
 			{
 				cin >> answer;
 				if( answer == 1 || answer == 2 || answer == 3 )
@@ -78,14 +78,9 @@ int main()
 				throw std::invalid_argument( "Received invalid selection" );
 			}
 		}
-		catch( const std::invalid_argument& e )
+		catch( const std::invalid_argument& e )  // Catches any invalid choices given by the player as an error
 		{
 			cout << "You did not make a valid choice, the game will now end" << endl;
-		}
-		
-		if( runGame )
-		{
-			break;
 		}
 		
 		if( playerObj.checkpoint == 4 )
