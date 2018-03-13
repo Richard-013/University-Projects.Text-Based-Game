@@ -1,18 +1,91 @@
 #include <iostream>
-#include <string>
+#include <stdio.h>
+#include <sqlite3.h>
 #include "Item.cpp"
-#include "DB_Inventory.cpp"
 #include "Mob.cpp"
 
 using namespace std;
-Mob mobs[10];
-int countMobs = 0;
-int currentMob = -1;
+
+static int callback(void *NotUsed, int argc, char **argv, char **azColName);
+int connectToDb(sqlite3 * db, int rc, char * zErrMsg);
+void closeDb(sqlite3 * db);
+void getMenuMain();
+void getMenuMob();
+void showMobs(sqlite3 * db, int rc, char * zErrMsg);
+void addMob(sqlite3 * db, int rc, char * zErrMsg);
+string setMobName(string name);
+int setMobValue(string name);
+
+// main block START
+
+int main () {
+   sqlite3 *db;
+   char *zErrMsg = 0;
+   int rc;
+   int currentMob = -1;
+   int isMenuOpen = true;
+
+   rc = sqlite3_open("test.db", &db);
+
+   if( rc ) {
+      fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+      return(0);
+   } else {
+      fprintf(stderr, "Opened database successfully\n");
+   }
+
+   while (isMenuOpen) {
+      if (currentMob == -1) {
+         getMenuMain();
+         int choice1;
+         cin >> choice1;
+
+         switch (choice1) {
+            case 1:
+               addMob(db, rc, zErrMsg);
+               break;
+            case 2:
+               // dropMob();
+               break;
+            case 3:
+               showMobs(db, rc, zErrMsg);
+               break;
+            case 4:
+               // chooseMob();
+               break;
+            case 5:
+               isMenuOpen = false;
+               break;
+            default:
+               cout << "Wrong input" << endl;
+               break;
+         }
+      }
+   }
+
+   closeDb(db);
+
+   return 0;
+}
+
+// main block END
+
+static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+   int i;
+   Mob mobs[argc];
+   for(i = 0; i < argc; i++) {
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   printf("\n");
+   return 0;
+}
+
 void getMenuMain(){
     cout << "\n1: Add mob \n";
     cout << "2: Drop mob \n";
     cout << "3: Show mobs \n";
     cout << "4: Choose mob \n";
+    cout << "5: Exit \n";
 }
 
 void getMenuMob(){
@@ -23,104 +96,56 @@ void getMenuMob(){
     cout << "5: Logout \n";
 }
 
-void addMob(){
-    string name;
-    cout<<"Enter name: ";
-    cin>>name;
-    mobs[countMobs].setName(name);
-    countMobs++;
-    cout<<"Mob "<<name<<" added"<<endl;
+void addMob(sqlite3 * db, int rc, char * zErrMsg) {
+   string name = setMobName("name");
+   int level = setMobValue("level");
+   int armor = setMobValue("armor");
+   int hp = setMobValue("hp");
+   int speed = setMobValue("speed");
+   int damage = setMobValue("damage");
+   int hitChance = setMobValue("hitChance");
+   int critChance = setMobValue("critChance");
+   int range = setMobValue("range");
+
+   string sql = "INSERT INTO Mobs values(null, '" + name + "', " + to_string(level) + ", " + to_string(armor) + ", " + to_string(hp) + ", " + to_string(speed) + ", " + to_string(damage) + ", " + to_string(hitChance) + ", " + to_string(critChance) + ", " + to_string(range) + ")";
+   rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+   if( rc != SQLITE_OK ) {
+      cout << SQLITE_OK;
+      fprintf(stderr, "SQL error: %s\n", zErrMsg);
+      sqlite3_free(zErrMsg);
+   } else {
+      fprintf(stdout, "Operation done successfully\n");
+   }
 }
 
-void dropMob(){
-    cout<<"Enter id of the mob to delete: ";
-    int id;
-    cin>>id;
-    if(id>=1&&id<=countMobs){
-        int index = id -1;
-        
-        for(int i = index; i<countMobs - 1; i++){
-            mobs[i] = mobs[i+1];
-        }
-        mobs[countMobs-1].mobReset();
-        countMobs--;
-        cout<<"Mob deleted"<<endl;
-    } else {
-        cout<<"No mob with that id"<<endl;
-    }
+void showMobs (sqlite3 * db, int rc, char * zErrMsg) {
+   const char *sql = "SELECT * FROM Mobs";
+   // sql = ";";
+   rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+   if( rc != SQLITE_OK ) {
+      cout << SQLITE_OK;
+      fprintf(stderr, "SQL error: %s\n", zErrMsg);
+      sqlite3_free(zErrMsg);
+   } else {
+      fprintf(stdout, "Operation done successfully\n");
+   }
 }
 
-void showMobs(){
-    cout<<"All active Mobs: "<<endl;
-    for(int i = 0; i<countMobs; i++){
-        cout<<i+1<<") "<<mobs[i].getName()<<endl;
-    }
+string setMobName (string name) {
+   cout << "Enter mob " << name << ": ";
+   string temp;
+   cin >> temp;
+   return temp;
 }
 
-void choiceMob(){
-    showMobs();
-    if(countMobs>0) {
-        cout<<"Choose one: ";
-        int id;
-        cin>>id;
-        currentMob = id - 1;
-        cout<<mobs[currentMob].getName()<<" choosen"<<endl;
-    } else {
-        cout<<"No mobs, first add one!"<<endl;
-    }
-    
+int setMobValue (string name) {
+   cout << "Enter mob " << name << ": ";
+   int temp;
+   cin >> temp;
+   return temp;
 }
 
-int main () {
-    
-    setInventoryShop();
-    
-    
-    while (true) {
-        
-        
-        if(currentMob==-1) {
-            getMenuMain();
-            int choice1;
-            cin >> choice1;
-            switch (choice1) {
-                case 1:
-                    addMob();
-                    break;
-                case 2:
-                    dropMob();
-                    break;
-                case 3: 
-                     showMobs();
-                     break;
-                case 4: 
-                     choiceMob();
-                     break;
-                default:
-                    cout<<"Wrong input"<<endl;
-            }
-        } else {
-            int choice2;
-            getMenuMob();
-            cin>>choice2;
-            switch(choice2){
-                case 1:
-                    mobs[currentMob].showInventory();
-                    break;
-                case 2:
-                    mobs[currentMob].addItem();
-                    break;
-                case 3:
-                    mobs[currentMob].deleteItem();
-                    break;
-                case 4:
-                    mobs[currentMob].levelUpItem();
-                    break;
-                case 5:
-                    currentMob = -1;
-                    break;
-            }
-            
-        }
-    }
+void closeDb (sqlite3 * db) {
+   cout << "closed connection to db\n";
+   sqlite3_close(db);
 }
