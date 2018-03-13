@@ -11,7 +11,7 @@ class Introduction
         Introduction();
         string chooseName();
         int chooseClass();
-        void gameBegin(Player &playerObj);
+        void characterCreation(Player &playerObj);
 
     protected:
 

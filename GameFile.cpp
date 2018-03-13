@@ -10,6 +10,7 @@
 
 using namespace std;
 
+// Declarations of functions, definitions are below main()
 void gamePart1(Player &playerObj);
 void gamePart2(Player &playerObj);
 void gamePart3(Player &playerObj);
@@ -136,7 +137,7 @@ void gamePart1( Player &playerObj )
 	// Part 1 of the game story
 	playerObj.checkpoint = 0;  // Sets the player's progress marker as 0 i.e. the start of the game
 	Introduction intro;
-	intro.gameBegin( playerObj );
+	intro.characterCreation( playerObj );
 	wantToSave( playerObj );
 }
 

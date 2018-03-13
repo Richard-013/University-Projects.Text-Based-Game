@@ -10,25 +10,8 @@ Introduction::Introduction()
     // Constructor for Introduction class
 }
 
-void Introduction::gameBegin(Player &playerObj)  // Starts the introduction sequence
+void Introduction::characterCreation(Player &playerObj)  // Starts the introduction sequence
 {
-	/* Possible start to game story
-    cout << "You awake with a sore back after a restless night of sleep in your uncomfortable bed." << endl;
-    cout << "You pull yourself out of the bed with some effort, trying to stretch out the aches" << endl;
-    cout << "left behind by the slowly breaking wooden slats of your bed." << endl;
-
-    cout << "\nThe fresh spring air rushes to greet you as you toss away the sheets of your bed," << endl;
-    cout << "it still carries a slight chill this early in the morning but after years of farm" << endl;
-    cout << "work you are more than used to it. You pull on your clothes and prepare yourself for" << endl;
-    cout << "your last day off before the farm began work again." << endl;
-
-    cout << "\nYou wander out of the small home you share with your fellow farm-hands and into the" << endl;
-    cout << "town. Despite the early hour, people were already busying themselves about the town," << endl;
-    cout << "setting up market stalls, hanging clothes to dry, and just about anything else that" << endl;
-    cout << "townspeople did. You greet familiar faces as you walk down the dirt road that leads" << endl;
-    cout << "to the centre of the village." << endl;
-	*/
-	
 	// Character Creation
 	playerObj.name = chooseName();  // Takes the player through choosing their character's name
 	playerObj.classID = chooseClass();  // Takes the player through choosing their own class
