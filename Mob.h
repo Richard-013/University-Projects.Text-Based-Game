@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 class Mob {
-    // private:
+    private:
         string name = "";
         int level = 0;
         Item items[6];
@@ -19,7 +19,7 @@ class Mob {
         string getName();
         void setName(string n);
         int getLevel();
-        // void setLevel(int l);
+        void setLevel(int l);
         void levelingUp();
         int getArmor();
         void setArmor(int a);
