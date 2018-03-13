@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 class Item {
-    // private:
+    private:
         string name = "";
         int level = 0;
         int armor = 0;
