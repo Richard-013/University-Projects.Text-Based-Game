@@ -15,7 +15,15 @@ void Introduction::characterCreation(Player &playerObj)  // Starts the introduct
 	// Character Creation
 	playerObj.name = chooseName();  // Takes the player through choosing their character's name
 	playerObj.classID = chooseClass();  // Takes the player through choosing their own class
-	playerObj.setCharacterClass(playerObj.classID);  // Sets the player's stats after they have chosen a class
+	try
+	{
+		playerObj.setCharacterClass(playerObj.classID);  // Sets the player's stats after they have chosen a class
+	}
+	catch( invalid_argument )
+	{
+		playerObj.setCharacterClass(1);  // Assigns a character the default class if an error occurs with class assignment
+		cout << "Invalid choice made, assigning default class of Warrior" << endl;
+	}
 }
 
 string Introduction::chooseName()  // Allows the player to choose their own name
@@ -35,8 +43,14 @@ string Introduction::chooseName()  // Allows the player to choose their own name
         }
         else  // Every time after the first that the player is asked for their name
         {
-            cout << "Oh, I don't really see why not, would you please tell me your name? Y/N" << endl;
+			cout << "Oh, I don't really see why not, would you ";
+			for( int count = 1; count <= i; count++ )
+			{
+				cout << "please ";
+			}
+			cout << "tell me your name? Y/N" << endl;
             cin >> answer;
+			i++;
         }
 
         if( answer == 'y' || answer == 'Y')  // Breaks the loop once the user has agreed to give their name

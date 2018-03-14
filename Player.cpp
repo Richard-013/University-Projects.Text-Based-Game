@@ -55,7 +55,7 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
             dexterity = dexterity + 2;
             break;
         default:
-            cout << endl << "Received invalid class choice, leaving as default" << endl;
+            throw invalid_argument( "Received invalid class choice" );
     }
 }
 

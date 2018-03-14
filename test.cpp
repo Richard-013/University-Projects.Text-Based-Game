@@ -1,17 +1,18 @@
 #include <iostream>
 #include <string>
-#include "libsqlite.hpp"
+//#include "libsqlite.hpp"
 //#include "SaveProgress.h"
+//#include "Player.h"
+//#include "Battle.h"
+//#include "Item.h"
+//#include "Mob.h"
+#include "Introduction.h"
 #include "Player.h"
-#include "Battle.h"
-#include "Item.h"
-#include "Mob.h"
 
 using namespace std;
 
 int main()
 {
-
     /*string sqliteFile = "RPGDatabase.db";
 
     try
@@ -71,4 +72,6 @@ int main()
     Item sword;
     bt.battle(testguy, badguy, sword);
     return 0;
+    Introduction intro;
+    intro.chooseName();
 }
