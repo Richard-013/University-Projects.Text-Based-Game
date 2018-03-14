@@ -8,7 +8,6 @@ class Player
     public:
         Player();
         void setCharacterClass(int classChoice);
-		void setLevel();
 
 		// The following defines the player's starting stats and default values
         std::string name = "Gordon";

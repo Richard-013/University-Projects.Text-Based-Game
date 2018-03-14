@@ -14,7 +14,7 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
 {
     switch( classChoice )  // Switch statement to set character attributes based on their chosen class
     {
-        case 1:
+        case 1:  // Sets the player as a Warrior
             classID = 1;
             characterClass = "Warrior";
             health = health + 2;
@@ -24,7 +24,7 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
             perception = perception + 1;
             dexterity = dexterity + 1;
             break;
-        case 2:
+        case 2:  // Sets the player as a Rogue
             classID = 2;
             characterClass = "Rogue";
             health = health + 1;
@@ -34,7 +34,7 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
             perception = perception + 1;
             dexterity = dexterity + 4;
             break;
-        case 3:
+        case 3:  // Sets the player as an Archer
             classID = 3;
             characterClass = "Archer";
             health = health + 1;
@@ -44,7 +44,7 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
             perception = perception + 4;
             dexterity = dexterity + 2;
             break;
-        case 4:
+        case 4:  // Sets the player as a Mage
             classID = 4;
             characterClass = "Mage";
             health = health + 1;
@@ -55,13 +55,8 @@ void Player::setCharacterClass(int classChoice) // Sets character class based up
             dexterity = dexterity + 2;
             break;
         default:
-            throw invalid_argument( "Received invalid class choice" );
+            cout << endl << "Received invalid class choice, leaving as default" << endl;
     }
-}
-
-void Player::setLevel()
-{
-	level = level + 1;
 }
 
 /*
