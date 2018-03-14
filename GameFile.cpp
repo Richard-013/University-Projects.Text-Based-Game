@@ -96,26 +96,26 @@ int main()  // Main function that runs the game
 		{
 			switch( playerObj.checkpoint )
 			{
-				case 0:
+				case 0:  // Runs the entire game from the beginning as the player has not made any progress
 					runWholeGame( playerObj );
 					runGame = false;
 					break;
-				case 1:
+				case 1:  // Runs the game from part 2
 					gamePart2( playerObj );
 					gamePart3( playerObj );
 					gameFinale( playerObj );
 					runGame = false;
 					break;
-				case 2:
+				case 2:  // Runs the game from part 3
 					gamePart3( playerObj );
 					gameFinale( playerObj );
 					runGame = false;
 					break;
-				case 3:
+				case 3:  // Runs the game finale
 					gameFinale( playerObj );
 					runGame = false;
 					break;
-				default:
+				default:  // Runs the game from the beginning if there is no checkpoint saved
 					cout << "No checkpoint data found, beginning game from the start" << endl;
 					runWholeGame( playerObj );
 					runGame = false;
