@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-//#include "passive-output.cpp"
+//include "ability-use.cpp"
 #include "Player.h"
 #include "Mob.h"
 #include "Item.h"
@@ -55,7 +55,7 @@ void Battle::magic(Player playerObj, Mob enemy)
 			{
 				cout << "You missed!" << endl;
 			}
-        }
+   }
 	else
 	{
 		cout << "Your feeble mind cannot comprehend magic!" << endl;
@@ -67,19 +67,52 @@ void Battle::item()
   //coming soon
 }
 
+int Battle::enemyphase(Player playerObj, Mob enemy)
+{
+  /*if(skipTurn==1)
+  {
+    return 0;
+  }*/
+  int hit = rand() % 100+1;
+  if(enemy.getHitChance() >= hit)
+  {
+    int incomingDamage = enemy.getDmg() - playerObj.defence;
+    playerObj.health = playerObj.health - incomingDamage;
+    /*if(enraged == 1 or poisoned == 1)
+    {
+      incomingDamage = incomingDamage + bosshp%10;
+    }*/
+    cout << "Enemy " << enemy.getName() << " swings at you for " << incomingDamage << " damage!" << endl;
+    cout << "Your health: " << playerObj.health << "              " << "Enemy health: " << enemy.getHP() << endl;
+    if(incomingDamage < 0) //Incoming damage cannot be negative
+    {
+      incomingDamage = 0;
+    }
+  }
+  else
+  {
+    cout << "Enemy Missed!" << endl;
+  }
+	//reminder: after enemy battle phase if enraged==1 or poisoned==1 deal bosshp%10 dmg
+	//reminder: if skipTurn==1 end enemy battle phase
+
+}
+
 void Battle::battle(Player playerObj, Mob enemy, Item equipped)
   //battle function takes player, mob and item objects as parameters
   //item object should be players equipped weapon
 {
-	  int turn = 0;
-    //passive();
+	int turn = 0;
+  //passive();
 	cout << "Level " << enemy.getLevel() << " " << enemy.getName() << " appears!" << endl;
   cout << "Select a battle option" << endl;
 	cout << "1 - Basic Attack" << endl;
 	cout << "2 - Ability" << endl;
 	cout << "3 - Magic" << endl;
 	cout << "4 - Item" << endl; //allows the player to select an option
-	while(turn % 2== 0)
+  while(playerObj.health > 0 && enemy.getHP() > 0)
+  {
+    while(turn % 2== 0)
   { //While it is the players turn:
     short choice;
     cin >> choice;
@@ -114,19 +147,14 @@ void Battle::battle(Player playerObj, Mob enemy, Item equipped)
         continue;
   }
  }
+    while(turn%2==1)
+    {
+      enemyphase(playerObj, enemy);
+      ++turn;
+    }
+  }
+	
 }
 
-	/* ENEMY BATTLE PHASE GOES HERE*/
-	//reminder: after enemy battle phase if enraged==1 or poisoned==1 deal bosshp%10 dmg
-	//reminder: if skipTurn==1 end enemy battle phase
 
 
-
-/*int main()
-{
-  Player testguy;
-  Mob enemydude;
-  Item sword;
-  Battle::battle(testguy, enemydude, sword);
-  return 0;
-}*/

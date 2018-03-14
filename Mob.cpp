@@ -58,3 +58,11 @@ int Mob::getRange(){
 void Mob::setRange(int r){
     range = r;
 }
+
+int Mob::getHP(){
+    return HP;
+}
+
+void Mob::setHP(int h){
+    HP = h;
+} 

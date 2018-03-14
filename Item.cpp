@@ -35,3 +35,11 @@ int Item::getDmg(){
 void Item::setDmg(int d){
     dmg = d;
 }
+
+int Item::getHitChance(){
+    return hitChance;
+}
+
+int Item::getRange(){
+    return range;
+}

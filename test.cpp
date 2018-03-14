@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
 
-    string sqliteFile = "RPGDatabase.db";
+    /*string sqliteFile = "RPGDatabase.db";
 
     try
     {
@@ -40,14 +40,14 @@ int main()
 		name = cur->get_text(1);
 		cout << name << endl;
 			
-		/*
+		
         auto a = cur->step();
         do
         {
           cout << cur->get_text(1) << endl;
           a = cur->step();
         } while( a );
-		*/
+		
 		Player player;
 		SaveProgress sp;
 		sp.load( player, 17 );
@@ -61,9 +61,14 @@ int main()
     {
         cerr << e.what() << endl;
         return 1;
-    }
+    }*/
     
     //SaveProgress sp;
     //sp.firstSave();
+    Battle bt;
+    Player testguy;
+    Mob badguy;
+    Item sword;
+    bt.battle(testguy, badguy, sword);
     return 0;
 }

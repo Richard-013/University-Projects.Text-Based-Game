@@ -14,6 +14,7 @@ class Battle
 		void ability(Player playerObj, Mob enemy);
     void magic(Player playerObj, Mob enemy);
     void item();
+    int enemyphase(Player playerObj, Mob enemy);
     void battle(Player playerObj, Mob enemy, Item equipped);
 		int main();
 
