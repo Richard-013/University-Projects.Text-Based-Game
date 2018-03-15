@@ -16,6 +16,7 @@ void gameFinale(Player &playerObj);
 void runWholeGame(Player &playerObj);
 void wantToSave(Player &playerObj);
 
+// Richard
 int main()  // Main function that runs the game
 {
 	bool runGame = true;  // This variable is used to let the player break the game loop and quit the game
@@ -124,6 +125,7 @@ int main()  // Main function that runs the game
 	return 0;
 }
 
+// Richard
 void gameStart( Player &playerObj )
 {
 	// Start of the game
@@ -133,6 +135,7 @@ void gameStart( Player &playerObj )
 	wantToSave( playerObj );
 }
 
+// Richard
 void gameFinale( Player &playerObj )
 {
 	// Endgame
@@ -142,6 +145,7 @@ void gameFinale( Player &playerObj )
 	wantToSave( playerObj );
 }
 
+// Richard
 void runWholeGame(Player &playerObj)
 {
 	// This function runs the whole game in sequence from the start
@@ -149,6 +153,7 @@ void runWholeGame(Player &playerObj)
 	gameFinale(playerObj);
 }
 
+// Richard
 void wantToSave(Player &playerObj)
 {
 	SaveProgress saveProg;

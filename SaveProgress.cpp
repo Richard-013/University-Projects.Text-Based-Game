@@ -6,11 +6,13 @@
 
 using namespace std;
 
+// Richard
 SaveProgress::SaveProgress()
 {
     //ctor
 }
 
+// Richard
 void SaveProgress::firstSave(Player &playerObj)  // Runs when it is the first time the player has saved the game
 {
     string databaseFile = "RPGDatabase.db";
@@ -46,6 +48,7 @@ void SaveProgress::firstSave(Player &playerObj)  // Runs when it is the first ti
 	firstSaveWorldState( playerObj );
 }
 
+// Richard
 void SaveProgress::firstSaveWorldState(Player &playerObj)
 {
 	string databaseFile = "RPGDatabase.db";
@@ -69,6 +72,7 @@ void SaveProgress::firstSaveWorldState(Player &playerObj)
     }
 }
 
+// Richard
 void SaveProgress::setCharacterID(Player &playerObj)
 {
 	string databaseFile = "RPGDatabase.db";
@@ -90,6 +94,7 @@ void SaveProgress::setCharacterID(Player &playerObj)
     }
 }
 
+// Richard
 void SaveProgress::save(Player playerObj)  // Saves the player's progress (used after the first save)
 {
 	string databaseFile = "RPGDatabase.db";
@@ -122,6 +127,7 @@ void SaveProgress::save(Player playerObj)  // Saves the player's progress (used 
 	saveWorldState( playerObj );
 }
 
+// Richard
 void SaveProgress::saveWorldState(Player playerObj)
 {
 	string databaseFile = "RPGDatabase.db";
@@ -144,6 +150,7 @@ void SaveProgress::saveWorldState(Player playerObj)
     }
 }
 
+// Richard
 void SaveProgress::load(Player &playerObj, int characterID)  // Allows the player to load their progress from the information stored in the database
 {
 	string databaseFile = "RPGDatabase.db";
@@ -197,6 +204,7 @@ void SaveProgress::load(Player &playerObj, int characterID)  // Allows the playe
     }
 }
 
+// Richard
 int SaveProgress::loadWorldState(int characterID)
 {
 	string databaseFile = "RPGDatabase.db";

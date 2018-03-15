@@ -5,11 +5,13 @@
 
 using namespace std;
 
+// Richard
 Introduction::Introduction()
 {
     // Constructor for Introduction class
 }
 
+// Richard
 void Introduction::characterCreation(Player &playerObj)  // Starts the introduction sequence
 {
 	// Character Creation
@@ -26,6 +28,7 @@ void Introduction::characterCreation(Player &playerObj)  // Starts the introduct
 	}
 }
 
+// Richard
 string Introduction::chooseName()  // Allows the player to choose their own name
 {
     char answer;
@@ -65,6 +68,7 @@ string Introduction::chooseName()  // Allows the player to choose their own name
     return name;  // Returns name so that it can be transferred into the Player class
 }
 
+// Richard
 int Introduction::chooseClass()  // Allows the player to choose their class
 {
     int answer;
