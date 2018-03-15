@@ -296,7 +296,62 @@ string NPC::NPCmeeting(int NPCID)
     
     return meetingMessage;
 }
-
+void NPC::NPCmeetingChoice(int MOBID)//always after NPCmeeting
+{
+    short answer;
+    cin>>answer;
+    
+    switch(answer)
+    {
+        case 1:
+            //run quest function for particular npc
+        case 2:
+        {
+            string databaseFile = "RPGDatabase.db";
+            //joining NPCData with Mobs database
+            try
+            {
+                sqlite::sqlite db(databaseFile);
+                auto cur = db.get_statement();
+                cur->set_sql("SELECT NPCData.NAME, NPCData.DUELPHRASE, NPCData.BATTLEREWARD, Mobs.HP, Mobs.Armor, Mobs.Damage FROM NPCData LEFT JOIN Mobs ON Mobs.MobID=NPCData.MOBID WHERE NPCData.MOBID = ?;");
+                cur->bind(1,MOBID);
+                cur->prepare();
+                cur->step();
+                name = cur->get_text(0);
+                duelPhrase = cur->get_text(1);
+                battleReward = cur->get_text(2);
+                health = cur->get_int(3);
+                armor = cur->get_int(4);
+                damage = cur->get_int(5);
+            }
+            catch( sqlite::exception e )      // catch all sql issues
+            {
+                cerr << e.what() << endl;
+            }
+            cout<<name<<": "<<duelPhrase<<endl;
+            cout<<"IF you win, you shall be granted "<<battleReward<<endl;
+            cout<<"Health: "<<health<<endl;
+            cout<<"Armor: "<<armor<<endl;
+            cout<<"Damage: "<<damage<<endl;
+            
+            /*
+            Battle bt;
+            Player testguy;
+            Mob badguy;
+            Item sword;
+            bt.battle(testguy, badguy, sword);
+            */
+        }
+            case 3:
+            {
+                cout<<"The items are: "<<endl;
+                cout<<getItem(int NPCID);
+                break;
+            }
+        
+    }
+    
+}
 
 
 
