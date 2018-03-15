@@ -26,7 +26,11 @@ class Player
 		int characterID;
 		int checkpoint = 0;
 		bool firstTimeSaving = true;  // This is used to tell the game which save function to run
-
+	//exp,level,stats variables and funcs
+	int experienceReward;
+        void gainExperience(int experienceReward);
+        void levelUp();
+        void raiseStats(); 
     protected:
 
     private:
