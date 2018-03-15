@@ -121,7 +121,7 @@ int main()  // Main function that runs the game
 
 void gameStart( Player &playerObj )
 {
-	// Part 1 of the game story
+	// Start of the game
 	playerObj.checkpoint = 0;  // Sets the player's progress marker as 0 i.e. the start of the game
 	Introduction intro;
 	intro.characterCreation( playerObj );
