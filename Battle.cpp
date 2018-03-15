@@ -171,7 +171,7 @@ void Battle::battle(int CharacterID, int MobID, Item equipped)
 	cout << "2 - Ability" << endl;
 	cout << "3 - Magic" << endl;
 	cout << "4 - Item" << endl; //allows the player to select an option
-  int hp = playerObj.health;
+  int hp = playerObj.remainingHealth;
   while(hp > 0 && enemyHP > 0)
   {
 	
@@ -230,6 +230,12 @@ void Battle::battle(int CharacterID, int MobID, Item equipped)
   }
   if(enemyHP <= 0)
   {
+    auto cur3 = db.get_statement();
+    cur3->set_sql("update CharacterData set CharacterRemainingHealth = ? where CharacterID = ?");
+    cur3->prepare();
+    cur3->bind(1, hp);
+    cur3->bind(2, CharacterID);
+    cur3->step();
     cout << "Your foe falls to the ground, lifeless." << endl;
     cout << "VICTORY!" << endl;
   }
