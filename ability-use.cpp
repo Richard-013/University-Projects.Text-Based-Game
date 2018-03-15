@@ -83,7 +83,7 @@ if(playerObj.classID==2)
     {
     case 1:
         {
-        abilityDamage = dexterity + turn + 0.25*(enemy.getHP()%50);
+        abilityDamage = playerObj.dexterity + turn + 0.25*(enemy.getHP()%50);
         cout<<"You've lurked from the shadows to stab your enemy in the back, dealing "<<abilityDamage<<" damage and poisoning them for an extra "<<enemy.getHP()%10<<" next turn."<<endl;
         poisoned = 1;
         return abilityDamage;
@@ -91,14 +91,14 @@ if(playerObj.classID==2)
         }
     case 2:
         {
-        abilityDamage = dexterity + turn + rand()%10;
+        abilityDamage = playerObj.dexterity + turn + rand()%10;
         cout<<"You've kicked your enemy where it hurts the most! You've dealt "<<abilityDamage<< " damage."<<endl;
         return abilityDamage;
         break;
         }
     case 3:
         {
-        abilityDamage = dexterity + turn + rand()%12;
+        abilityDamage = playerObj.dexterity + turn + rand()%12;
         cout<<"You've dealt "<<abilityDamage<<" to all the enemies."<<endl;
         return abilityDamage;
         break;
@@ -108,8 +108,8 @@ if(playerObj.classID==2)
         cout<<"Invalid input.";
         cin>>ability;
     }
-break;
-}
+    break;
+    }
 }
 if(playerObj.classID==3)
 {
@@ -122,17 +122,17 @@ if(playerObj.classID==3)
 
     switch(ability)
     {
-        int extradmg;
+
     case 1:
         {
-        abilityDamage = perception + rand()%10+extradmg;
+        abilityDamage = perception + rand()%10;
         cout<<"You've grabbed your skinning knife and dealt "<<abilityDamage<<" to the enemy's face."<<endl;
         return abilityDamage;
         break;
         }
     case 2:
         {
-        abilityDamage = perception + turn + enemy.getHP()%5+1+extradmg;
+        abilityDamage = perception + turn + enemy.getHP()%5;
         cout<<"You've hit your enemy in the head dealing "<<abilityDamage<< " damage and dizzying it for the next turn."<<endl;
         skipTurn=1;
         return abilityDamage;
@@ -140,7 +140,7 @@ if(playerObj.classID==3)
         }
     case 3:
         {
-        abilityDamage = perception + turn + rand()%12+1+extradmg;
+        abilityDamage = perception + turn + rand()%12;
         cout<<"You've dealt "<<abilityDamage<<" to all the enemies."<<endl;
         return abilityDamage;
         break;
@@ -151,7 +151,8 @@ if(playerObj.classID==3)
         cin>>ability;
         }
     break;
-}
+    }
+}  
 if(playerObj.classID==4)
 {
     cout<<" 1 - Fireball"<<endl;
@@ -174,6 +175,7 @@ if(playerObj.classID==4)
             {
             cout<<"You've freezed yourself, becoming invulnerable to any damage for the next turn."<<endl;
             skipTurn=1;
+            abilityDamage = 0;
             return abilityDamage;
             break;
             }
@@ -193,8 +195,6 @@ if(playerObj.classID==4)
     }
 
 }
-}
-  
 }
 
 

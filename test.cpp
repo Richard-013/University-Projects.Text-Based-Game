@@ -69,7 +69,7 @@ int main()
     Battle bt;
     Player testguy;
     Item sword;
-    bt.battle(3, 5, sword);
+    bt.battle(16, 5, sword);
     return 0;
     //Introduction intro;
     //intro.chooseName();

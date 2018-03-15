@@ -11,7 +11,7 @@
 
 using namespace std;
 
-
+int skipTurn, abilityDamage, poisoned, enraged;
 
 int Battle::basic_attack(Player playerObj, Mob enemy, Item equipped)
 {	  srand(time(NULL));
@@ -26,6 +26,11 @@ int Battle::basic_attack(Player playerObj, Mob enemy, Item equipped)
               {
                 cout << "Critical hit!" << endl;
                 incomingDamage *= 2;
+              }
+              if(enraged==1)
+              {
+                enraged = 0;
+                incomingDamage += enemy.getHP()%10;
               }
               cout << "You hit for " << incomingDamage << endl;
               return incomingDamage;
@@ -64,7 +69,7 @@ int Battle::magic(Player playerObj, Mob enemy)
 			if(mageHitChance >= hit)
 			{
 				int incomingDamage = playerObj.intelligence*2;
-				cout << "Magic attack hits for "+incomingDamage << endl;
+				cout << "Magic attack hits for "<<incomingDamage << endl;
         return incomingDamage;
 			}
 			else
@@ -87,19 +92,16 @@ void Battle::item()
 
 int Battle::enemyphase(Player playerObj, Mob enemy)
 {
-  /*if(skipTurn==1)
+  if(skipTurn==1)
   {
+    skipTurn = 0;
     return 0;
-  }*/
+  }
   int hit = rand() % 100+1;
   int crit = rand() % 100+1;  
   if(enemy.getHitChance() >= hit)
   {
     int incomingDamage = enemy.getDmg() - playerObj.defence;
-    /*if(enraged == 1 or poisoned == 1)
-    {
-      incomingDamage = incomingDamage + bosshp%10;
-    }*/
     if(incomingDamage < 0) //Incoming damage cannot be negative
     {
       incomingDamage = 0;
