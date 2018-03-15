@@ -14,8 +14,8 @@ class Player
         std::string characterClass = "Villager";
         int level = 1;
         int experience = 0;
-        int health = 10;
-		int remainingHealth = health;
+        int health = 100;
+        int remainingHealth = health;
         int attack = 3;
         int defence = 3;
         int intelligence = 3;

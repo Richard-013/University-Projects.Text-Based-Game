@@ -43,3 +43,11 @@ int Item::getHitChance(){
 int Item::getRange(){
     return range;
 }
+
+int Item::getCritChance(){
+    return critChance;
+}
+
+int Item::getSpeed(){
+    return speed;
+}

@@ -9,9 +9,9 @@ class Mob {
         int level = 0;
         Item items[6];
         int armor = 0;
-        int HP = 1000;
+        int HP = 30;
         int speed = 0;
-        int dmg = 10;
+        int dmg = 7;
         int hitChance = 90;
         int critChance = 10;
         int range = 0;
@@ -32,6 +32,7 @@ class Mob {
         int getHitChance();
         void setHitChance(int h);
         int getRange();
+        int getCritChance();
         void setRange(int r);
         void showInventory();
         void addItem();

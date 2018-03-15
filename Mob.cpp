@@ -66,3 +66,7 @@ int Mob::getHP(){
 void Mob::setHP(int h){
     HP = h;
 } 
+
+int Mob::getCritChance(){
+    return critChance;
+}

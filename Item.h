@@ -7,10 +7,10 @@ class Item {
         string name = "";
         int level = 0;
         int armor = 0;
-        int dmg = 0;
+        int dmg = 5;
         int speed = 0;
-        int hitChance = 0;
-        int critChance = 0;
+        int hitChance = 90;
+        int critChance = 15;
         int range = 0;
         
     public:
