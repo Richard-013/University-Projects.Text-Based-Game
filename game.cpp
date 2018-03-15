@@ -1,6 +1,8 @@
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include "Quests.h"
+#include "Quests.cpp"
+#include <string>
+
 
 using namespace std;
 void quest1();
@@ -16,18 +18,62 @@ void MagicForest();
 void questUpdate3();
 void questUpdate2();
 void Hospital();
-
-
-
-int input;
-int stages[8] = {1, 0, 0, 0, 0, 0, 0, 0};
-
 string qUpdates;
 string qStages;
 
-int main() 
-    {
 
+Quests QuestsOne;
+
+void ClothingStore() {
+        system("cls");
+        cout << "\n The commands here are (1.buyglasses),(2.clothes),(3.buyhat)." << endl;
+        cout << "\n 1. buyglasses" << endl;
+        cout << "\n 2. clothes" << endl;
+        cout << "\n 3. buyhat" << endl;
+        cout << "\n 4. I don't want any of these";
+        cout << "\n ";
+        cin >> input;
+      
+        switch (input) {
+
+            case 1: case 2: case 3:
+            
+            quest1 ();
+            qUpdates = "Quest updated";
+            questUpdate1();
+            break;
+
+            case 4:
+            system("cls");
+            cout << "\n If you don't want one of these, it's ok." << endl;
+            cout << endl ;
+            system("pause");
+      }}
+
+
+void MagicVillage() {
+
+    system("cls");
+    cout << "\n You are in the Magic viillage. Where would you like to do first?" << endl;
+    cout << "\n 1. Clothing Store" << endl;
+    cout << "\n 2. Hospital" << endl;
+    cout << "\n 3. Get a fightstyle and then go to Race Arena" << endl;
+    cout << "\n 4. Magic Forest" << endl;
+
+    cout << "\n> ";
+    cin >> input;
+    switch (input) {
+
+        case 1:
+        ClothingStore();
+         
+        case 2:
+       quest2();
+
+    }   
+}
+  
+void WelcomeGame() {
     srand (time(NULL));
 
     system("cls");
@@ -46,84 +92,9 @@ int main()
         MagicVillage();
 
         case 2:
-        return EXIT_SUCCESS;}
+        return EXIT_SUCCESS;}}
 
 
-void MagicVillage() {
-
-    system("cls");
-    cout << "\n You are in the Magic viillage. Where would you like to do first?" << endl;
-    cout << "\n 1. Clothing Store" << endl;
-    cout << "\n 2. Hospital" << endl;
-    cout << "\n 3. Get a fightstyle and then go to Race Arena" << endl;
-    cout << "\n 4. Magic Forest" << endl;
-
-    cout << "\n> ";
-    cin >> input;
-    switch (input) {
-
-        case 1:
-        ClothingStore();
-
-        case 2:
-       quest2();
-
-    }   
-}
-
-void ClothingStore() {
-
-    if (stages[0] == 1) 
-        system("cls");
-        cout << "\n The commands here are (1.buyglasses),(2.clothes),(3.buyhat)." << endl;
-        cout << "\n 1. buyglasses" << endl;
-        cout << "\n 2. clothes" << endl;
-        cout << "\n 3. buyhat" << endl;
-        cout << "\n 4. I don't want any of these";
-        cout << "\n ";
-        cin >> input;
-      
-      switch (input) {
-
-            case 1: case 2: case 3:
-            
-            quest1 ();
-            qUpdates = "Quest updated";
-            questUpdate1();
-            break;
-
-            case 4:
-            system("cls");
-            cout << "\n If you don't want one of these, it's ok." << endl;
-            cout << "\n ";
-            system("pause");
-      }   
-}
-        
-
-
-   // if (stages[1] == 1) {
-      //  stage2();
-    //}
-
-    //if (stages[2] == 1) {
-    //    stage3();
-    //}
-
-    //else {
-    //    stage4(sword, gold);
-    //}
-
-
-void quest1() {
-
-    system("cls");
-    cout << "Congratiulation! You have purchased a new item from Clothing Store.";
-    cout << "\n ";
-    system("pause");
-    stages[1] = 1;
-
-}
  void quest2() {
 
     system("cls");
@@ -135,14 +106,13 @@ void quest1() {
 
     system("cls");
     cout << "\n 1. Okay, I will go to the Gym firstly and then to the Race Arena. " << endl;
-    cout << "\n 2. I don't think I'm the right person for the this. I don't like sport." << endl;
+    cout << "\n 2. I don't think I'm the right person for this. I don't like sport." << endl;
     cout << "\n> ";
     cin >> input;
     switch (input) {
 
         case 1:
-        stages[0] = 0;
-        stages[2] = 1;
+       
         system("cls");
         cout << "\n Wish you have fun!" << endl;
         cout << "\n ";
@@ -152,19 +122,14 @@ void quest1() {
         questUpdate2();
         RaceArena();
         Hospital();
-        //riverstead();
+        
 
         case 2:
-        stages[0] = 0;
-        stages[1] = 1;
         system("cls");
         cout << "\n You should then go to the hospital. Someone is waiting for you!" << endl;
         cout << "\n ";
         system("pause");
-        
-        Hospital();
-
-    }
+        Hospital();}
 }
 
 void Hospital() {
@@ -230,7 +195,7 @@ void MagicForest() {
         cout << "\n with the magic piece of wood for his daughter." << endl;
         cout << endl;
         system ("pause");
-        stages[3]=1;
+        
         qUpdates = "Quest updated";
         questUpdate3();
 
@@ -240,22 +205,45 @@ void MagicForest() {
         cout << "\n Oh, good, you got it. You will need it" << endl;
         cout << "\n to can cut a piece of that magic wood for Gary" << endl;
         cout << "\n Now back at the entrance and move left, there is the tree." <<endl;
-        cout << "\n You have received now your teleport item"<< endl ;
+        cout << "\n You have received now your teleport item and a key."<< endl ;
         system("pause");
-        qUpdates = "Quest updated";
+        qUpdates = "Quest updated";}
        
+      
+        
         questUpdate3();
 
     }
-}
-  
+ void Fishing() {
+    system("cls");
+    cout << "\n You're now fishing.";
+      system("pause");
+      cout << "\n Oh, look! You caught a golden fish!" << endl;
+      cout << "\n This will help you with health in your battle" << endl;
+      cout << "\n with the dragon if you will do the quests until" << endl;
+      cout << "\n the final one";
+      cout << endl;
+  }
+  void Sailing () {
+    system("cls");
+    cout << "\n You are now sailing on the magic lake " << endl;
+    cout << "\n Now you should take one water lily " << endl;
+    cout << "\n Careful! Don't bend down too much!" << endl;
+    cout << "\n Congrats! Now you got the water lily" << endl;
+    cout << "\n You can use it to increase your dexterity." << endl;
+    cout << endl;
+    
+    
+  }
+
+
 void Lake() {
   
   system("cls");
   cout <<  "\n You are now at the lake near the city" << endl;
   cout << "\n What would you like to do?" << endl;
   cout << "\n 1. I'd like to fish. It's that possible?" << endl;
-  cout << "\n 2. I'd like sailing with boat. "
+  cout << "\n 2. I'd like sailing with boat. ";
   cin >> input;
 
     switch (input)
@@ -269,64 +257,62 @@ void Lake() {
 
 }
 
-  void Fishing() {
-      cout << "\n You're now fishing."
-      system("pause")
-      cout << "\n Oh, look! You caught a golden fish!" << endl;
-      cout << "\n This will help you with health in your battle" << endl;
-      cout << "\n with the dragon if you will "
-  }
-    
-    
-    
-    
-    
-    
+ 
     
   
+ void  MagicBee()
+ { system ("cls");
+  cout << "\n Hey you! You are really brave!" << endl;
+  cout << "\n Could you help me with something from the magic bee" << endl;
+  cout << "\n I saw here in the forect and I am too old to beat this monster" << endl;
+  cout << "It's about that gigant bee.. here in the forest " << endl;
+  cout << endl;
+  system ("pause");
+  
+  cout << "I need to have some honey from her beehive." << endl;
+  cout << "\n This will help me to regain my strength" << endl;
+  cout << "\n 1. Sure I can help you." << endl;
+  cout << "\n 2. No, I want to go in the desert " << endl;
+  
+ }
+   
 
-  void questUpdate1() {
 
-    system("cls");
-    cout << "\n " << qUpdates << " Go to clothing store and buy something."  << endl;
+//void end() 
+
+  //  system("cls");
+   // cout << "\n Thank you for playing RPG!" << endl;
+    //cout << "\n ";
+    //system("pause");
+    //main();
+//
+
+void quest1() 
+
+{system("cls");
+ cout << "Congratiulation! You have purchased a new item from Clothing Store." << endl;
     cout << "\n ";
     system("pause");
 
-    if (qStages != " ") {
-        system("cls");
-        cout << "\n " << qStages << endl;
-        cout << "\n ";
-        system("pause");
-    }
+    QuestsOne.insertDetails ("Clothing","1" ,"Nothing","10");
+}  
+  
 
-
-}
-
-void questUpdate2() {
-    system ("cls");
-    cout << "\n" << qUpdates << "Go to the gym and buy a new fightsyle and then to Race Arena." << endl;
-    cout << "\n";
-    system("pause");
-
-}
-
-
-void questUpdate3() {
-    system("cls");
-    cout << "\n" << qUpdates << "Give the magic wood to the Gary's daughter." << endl;
-return;
+  
+ 
+int main()
+  
+{ int input;
+WelcomeGame ();
+ 
+//end();
+ return 0;
 }
 
 
 
-void end() {
 
-    system("cls");
-    cout << "\n Thank you for playing RPG!" << endl;
-    cout << "\n ";
-    system("pause");
-    main();
-}
+
 
 
 
