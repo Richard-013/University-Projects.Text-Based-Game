@@ -16,6 +16,7 @@ class NPC
     
     int damage;
     int health;
+    int armor;
     
     //get variables
     string duelPhrase;
@@ -39,6 +40,7 @@ class NPC
         int getHealth(int NPCID);
         int getDamage(int NPCID);
         string NPCmeeting(int NPCID);
+        void NPCmeetingChoice(int MOBID);
         
 
 };
