@@ -11,9 +11,7 @@
 using namespace std;
 
 // Declarations of functions, definitions are below main()
-void gamePart1(Player &playerObj);
-void gamePart2(Player &playerObj);
-void gamePart3(Player &playerObj);
+void gameStart(Player &playerObj);
 void gameFinale(Player &playerObj);
 void runWholeGame(Player &playerObj);
 void wantToSave(Player &playerObj);
@@ -127,26 +125,12 @@ int main()  // Main function that runs the game
 	return 0;
 }
 
-void gamePart1( Player &playerObj )
+void gameStart( Player &playerObj )
 {
 	// Part 1 of the game story
 	playerObj.checkpoint = 0;  // Sets the player's progress marker as 0 i.e. the start of the game
 	Introduction intro;
 	intro.characterCreation( playerObj );
-	wantToSave( playerObj );
-}
-
-void gamePart2( Player &playerObj )
-{
-	// Part 2 of the game story
-	playerObj.checkpoint = 1;  // Sets the player's progress marker as 1, so they have completed the start of the game
-	wantToSave( playerObj );
-}
-
-void gamePart3( Player &playerObj )
-{
-	// Part 3 of the game story
-	playerObj.checkpoint = 2;  // Sets the player's progress marker as 2, so they have completed the middle of the game
 	wantToSave( playerObj );
 }
 
@@ -162,9 +146,7 @@ void gameFinale( Player &playerObj )
 void runWholeGame(Player &playerObj)
 {
 	// This function runs the whole game in sequence from the start
-	gamePart1(playerObj);
-	gamePart2(playerObj);
-	gamePart3(playerObj);
+	gameStart(playerObj);
 	gameFinale(playerObj);
 }
 
