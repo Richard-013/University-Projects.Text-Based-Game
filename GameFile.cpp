@@ -99,17 +99,11 @@ int main()  // Main function that runs the game
 					runGame = false;
 					break;
 				case 1:  // Runs the game from part 2
-					gamePart2( playerObj );
-					gamePart3( playerObj );
+					gameStart( playerObj );
 					gameFinale( playerObj );
 					runGame = false;
 					break;
 				case 2:  // Runs the game from part 3
-					gamePart3( playerObj );
-					gameFinale( playerObj );
-					runGame = false;
-					break;
-				case 3:  // Runs the game finale
 					gameFinale( playerObj );
 					runGame = false;
 					break;
