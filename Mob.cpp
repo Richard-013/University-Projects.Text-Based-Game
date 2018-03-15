@@ -15,6 +15,10 @@ int Mob::getLevel(){
     return level;
 }
 
+void Mob::setLevel(int l){
+    level = l;
+}
+
 void Mob::levelingUp() {
     level = level + 1;
 }
@@ -69,4 +73,8 @@ void Mob::setHP(int h){
 
 int Mob::getCritChance(){
     return critChance;
+}
+
+void Mob::setCritChance(int c){
+    critChance = c;
 }

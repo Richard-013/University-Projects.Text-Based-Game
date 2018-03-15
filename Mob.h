@@ -33,6 +33,7 @@ class Mob {
         void setHitChance(int h);
         int getRange();
         int getCritChance();
+        void setCritChance(int c);
         void setRange(int r);
         void showInventory();
         void addItem();

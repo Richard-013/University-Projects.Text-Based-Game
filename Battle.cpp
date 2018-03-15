@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <string>
 #include <ctime>
-//include "ability-use.cpp"
+#include "ability-use.h"
 #include "Player.h"
 #include "Mob.h"
 #include "Item.h"
@@ -49,9 +49,10 @@ int Battle::basic_attack(Player playerObj, Mob enemy, Item equipped)
 	  }
 }
 
-int Battle::ability(Player playerObj, Mob enemy)
+int Battle::abilityUse(Player playerObj, Mob enemy, int turn)
 {
-  //ability.use(playerObj.classID);
+  int incomingDamage = useAbility(playerObj, enemy, turn);
+  return incomingDamage;
 }
 
 int Battle::magic(Player playerObj, Mob enemy)
@@ -121,47 +122,70 @@ int Battle::enemyphase(Player playerObj, Mob enemy)
 
 }
 
-void Battle::battle(Player playerObj, Mob enemy, Item equipped)
+void Battle::battle(Player playerObj, int MobID, Item equipped)
   //battle function takes player, mob and item objects as parameters
   //item object should be players equipped weapon
 {
-	int turn = 0;
+  Mob enemy;
+  sqlite::sqlite db("RPGDatabase.db");
+  auto cur = db.get_statement();
+  cur->set_sql("select * from Mobs where MobID = ?");
+  cur->prepare();
+  cur->bind(1, MobID);
+  cur->step();
+  enemy.setName(cur->get_text(1));
+  enemy.setLevel(cur->get_int(2));
+  enemy.setArmor(cur->get_int(3));
+  enemy.setHP(cur->get_int(4));
+  enemy.setSpeed(cur->get_int(5));
+  enemy.setDmg(cur->get_int(6));
+  enemy.setHitChance(cur->get_int(7));
+  enemy.setCritChance(cur->get_int(8));
+  enemy.setRange(cur->get_int(9));
+  int enemyHP = enemy.getHP();
+  int turn = 0;
+  printf("\033c");
   if(equipped.getSpeed() < enemy.getSpeed()) //Enemy has attack priority if they have higher speed
   {
     turn = 1;
   }
-  //passive();
-	cout << "Level " << enemy.getLevel() << " " << enemy.getName() << " appears!" << endl;
+  cout << " Level " << enemy.getLevel() << " " << enemy.getName() << " appears!" << endl;
   cout << "Select a battle option" << endl;
 	cout << "1 - Basic Attack" << endl;
 	cout << "2 - Ability" << endl;
 	cout << "3 - Magic" << endl;
 	cout << "4 - Item" << endl; //allows the player to select an option
   int hp = playerObj.health;
-  int enemyhp = enemy.getHP();
-  while(hp > 0 && enemyhp > 0)
+  while(hp > 0 && enemyHP > 0)
   {
+	
     while(turn % 2== 0)
   { //While it is the players turn:
     short choice;
     cin >> choice;
+    printf("\033c");
+    cout << " Select a battle option" << endl;
+    cout << "1 - Basic Attack" << endl;
+    cout << "2 - Ability" << endl;
+    cout << "3 - Magic" << endl;
+    cout << "4 - Item" << endl;
     switch (choice)
     {
     case 1:
     {
-      enemyhp = enemyhp - basic_attack(playerObj, enemy, equipped);
+      enemyHP = enemyHP - basic_attack(playerObj, enemy, equipped);
       ++turn;
       break;
     }
     case 2:
     {
-      enemyhp = enemyhp - ability(playerObj, enemy);
+      enemyHP = enemyHP - abilityUse(playerObj, enemy, turn);
       ++turn;
       break;
     }
     case 3:
     {
-      enemyhp = enemyhp - magic(playerObj, enemy);
+      enemyHP = enemyHP - magic(playerObj, enemy);
       ++turn;
       break;
     }
@@ -179,7 +203,7 @@ void Battle::battle(Player playerObj, Mob enemy, Item equipped)
     while(turn%2==1)
     {
       hp = hp - enemyphase(playerObj, enemy);
-      cout << "Your HP: " << hp << "                 " << "Enemy HP: " << enemyhp << endl;
+      cout << "Your HP: " << hp << "                 " << "Enemy HP: " << enemyHP << endl;
       ++turn;
     }
   }
@@ -188,7 +212,7 @@ void Battle::battle(Player playerObj, Mob enemy, Item equipped)
     cout << "You fought bravely, but you were overpowered and killed. " << endl;
     cout << "GAME OVER" << endl;
   }
-  if(enemyhp <= 0)
+  if(enemyHP <= 0)
   {
     cout << "Your foe falls to the ground, lifeless." << endl;
     cout << "VICTORY!" << endl;

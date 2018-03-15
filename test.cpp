@@ -8,7 +8,7 @@
 #include "Mob.h"
 #include "Introduction.h"
 #include "Player.h"
-
+#include "ability-use.h"
 using namespace std;
 
 int main()
@@ -68,9 +68,8 @@ int main()
     //sp.firstSave();
     Battle bt;
     Player testguy;
-    Mob badguy;
     Item sword;
-    bt.battle(testguy, badguy, sword);
+    bt.battle(testguy, 5, sword);
     return 0;
     //Introduction intro;
     //intro.chooseName();
