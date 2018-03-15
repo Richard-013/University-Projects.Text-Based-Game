@@ -122,26 +122,42 @@ int Battle::enemyphase(Player playerObj, Mob enemy)
 
 }
 
-void Battle::battle(Player playerObj, int MobID, Item equipped)
+void Battle::battle(int CharacterID, int MobID, Item equipped)
   //battle function takes player, mob and item objects as parameters
   //item object should be players equipped weapon
-{
-  Mob enemy;
+{ Player playerObj;
   sqlite::sqlite db("RPGDatabase.db");
   auto cur = db.get_statement();
-  cur->set_sql("select * from Mobs where MobID = ?");
+  cur->set_sql("select * from CharacterData where CharacterID = ?");
   cur->prepare();
-  cur->bind(1, MobID);
+  cur->bind(1, CharacterID);
   cur->step();
-  enemy.setName(cur->get_text(1));
-  enemy.setLevel(cur->get_int(2));
-  enemy.setArmor(cur->get_int(3));
-  enemy.setHP(cur->get_int(4));
-  enemy.setSpeed(cur->get_int(5));
-  enemy.setDmg(cur->get_int(6));
-  enemy.setHitChance(cur->get_int(7));
-  enemy.setCritChance(cur->get_int(8));
-  enemy.setRange(cur->get_int(9));
+  playerObj.name = cur->get_text(1);
+  playerObj.classID = cur->get_int(2);
+  playerObj.level = cur->get_int(3);
+  playerObj.experience = cur->get_int(4);
+  playerObj.health = cur->get_int(5);
+  playerObj.remainingHealth = cur->get_int(6);
+  playerObj.attack = cur->get_int(7);
+  playerObj.defence = cur->get_int(8);
+  playerObj.intelligence = cur->get_int(9);
+  playerObj.perception = cur->get_int(10);
+  playerObj.dexterity = cur->get_int(11);
+  Mob enemy;
+  auto cur2 = db.get_statement();
+  cur2->set_sql("select * from Mobs where MobID = ?");
+  cur2->prepare();
+  cur2->bind(1, MobID);
+  cur2->step();
+  enemy.setName(cur2->get_text(1));
+  enemy.setLevel(cur2->get_int(2));
+  enemy.setArmor(cur2->get_int(3));
+  enemy.setHP(cur2->get_int(4));
+  enemy.setSpeed(cur2->get_int(5));
+  enemy.setDmg(cur2->get_int(6));
+  enemy.setHitChance(cur2->get_int(7));
+  enemy.setCritChance(cur2->get_int(8));
+  enemy.setRange(cur2->get_int(9));
   int enemyHP = enemy.getHP();
   int turn = 0;
   printf("\033c");
@@ -217,6 +233,8 @@ void Battle::battle(Player playerObj, int MobID, Item equipped)
     cout << "Your foe falls to the ground, lifeless." << endl;
     cout << "VICTORY!" << endl;
   }
+  
+  
 }
 
 
