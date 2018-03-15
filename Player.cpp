@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include "libsqlite.hpp"
 
 using namespace std;
 
@@ -70,7 +71,7 @@ void Player::gainExperience(int experienceReward) //input is the experience rewa
             sqlite::sqlite db( databaseFile );
             auto cur = db.get_statement();
             cur->set_sql( "SELECT CharacterExperience FROM CharacterData WHERE CharacterID = ?");
-            cur->bind(1,characterID)
+            cur->bind(1,characterID);
             cur->prepare();
             cur->step();
             
@@ -105,7 +106,7 @@ void Player::levelUp() //since the story is linear this can only do so much....
             sqlite::sqlite db( databaseFile );
             auto cur = db.get_statement();
             cur->set_sql( "SELECT CharacterLevel FROM CharacterData WHERE CharacterID = ?");
-            cur->bind(1,characterID)
+            cur->bind(1,characterID);
             cur->prepare();
             cur->step();
             level = cur->get_int(0);
@@ -138,7 +139,7 @@ void Player::raiseStats() //call when player levels up
             sqlite::sqlite db( databaseFile );
             auto cur = db.get_statement();
             cur->set_sql( "SELECT * FROM CharacterData WHERE CharacterID = ?");
-            cur->bind(1,characterID)
+            cur->bind(1,characterID);
             cur->prepare();
             cur->step();
             name = cur->get_text(1);

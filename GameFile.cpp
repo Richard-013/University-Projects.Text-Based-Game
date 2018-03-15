@@ -81,6 +81,11 @@ int main()  // Main function that runs the game
 			cout << "You did not make a valid choice, the game will now end" << endl;
 		}
 		
+		if( runGame == false )
+		{
+			break;
+		}
+		
 		if( playerObj.checkpoint == 4 )
 		{
 			cout << "This character has already completed the game" << endl;
