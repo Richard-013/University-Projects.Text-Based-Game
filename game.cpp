@@ -174,14 +174,16 @@ void StripCow () {
 
 }
 
-void MobsVillage () {
+void MobsVillage (Player playerObj) {
   cout << "\n Oups! It looks like you have been fooled. " << endl;
   cout << "\n The camel took you here. " << endl;
   cout << "\n It's a dangerous place!" << endl;
   cout << "\n Now you need to have some fights with the mobs to can continue your adventure"<< endl;
-
-  //fightig with mobs
-  
+  Battle bt;
+  Item weapon;
+  bt.battle(playerObj.CharacterID, 5, weapon);
+  bt.battle(playerObj.CharacterID, 7, weapon);
+  bt.battle(playerObj.CharacterID, 8, weapon);
   cout << "Well done! Here is your reward and good luck for the other quests." << endl;
   cout << "\n ***Congratiulations! You won a new life!" << endl;
   QuestsOne.insertDetails ("Fight with Mobs", "new life",500);
