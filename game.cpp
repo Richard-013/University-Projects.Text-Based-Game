@@ -1,3 +1,7 @@
+// Compile Command:
+// g== --std=c++14 game.cpp Quests.cpp Battle.cpp Item.cpp Player.cpp SaveProgress.cpp Introduction.cpp ability-use.cpp Mob.cpp NPC.cpp -o Game -lsqlite3
+// Creates an executable called Game
+
 #include <iostream>
 #include <string>
 #include "libsqlite.hpp"
