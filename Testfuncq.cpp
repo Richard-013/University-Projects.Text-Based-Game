@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Quests.h"
 #include "Quests.cpp"
+#include "libsqlite.hpp"
 //#include <string>
 
 using namespace std;
@@ -11,15 +12,12 @@ void ClothingStore();
 void MagicVillage();
 void quest1();
 int input;
-
 void quest1() 
 
 {
  cout << "Congratiulation! You have purchased a new item from Clothing Store." << endl;
     cout << "\n ";
-    //system("pause");
-
-    QuestsOne.insertDetails ("Clothing",1 ,"Nothing",10);
+QuestsOne.insertDetails ("Clothing","Sparkly Scarf",10);
 }  
   
 
@@ -93,4 +91,5 @@ int main()
         MagicVillage();
 
         case 2:
-        return EXIT_SUCCESS;}}
+        break;
+        return 0;}}
