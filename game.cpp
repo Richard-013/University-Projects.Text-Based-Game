@@ -3,6 +3,9 @@
 #include "Quests.cpp"
 #include "libsqlite.hpp"
 #include <string>
+#include "Battle.h"
+#include "Item.h"
+#include "Player.h"
 using namespace std;
 string qUpdates;
 int input;
@@ -23,12 +26,15 @@ void StripCow();
 void DirtyWork();
 Quests QuestsOne;
 
-void RaceArena () {
+void RaceArena (Player playerObj) {
   
   cout << "\n I am Bully and I have a new quest for you!" << endl;
   cout << "\n Fight me! If you will win, I'll be given you the Black Belt"<< endl;
+  Battle bt;
+  Item fists;
+  bt.battle(playerObj.CharacterID, 6, fists);
   //battle
-  cout << "***Congratiulations! You won a black belt and 10 points."<< endl;
+  cout << "***Congratulations! You won a black belt and 10 points."<< endl;
   QuestsOne.insertDetails ("RaceArena","BlackBelt",10);
 }
 void ClothingStore() {
@@ -112,13 +118,15 @@ void MagicVillage() {
 
     }   
 }
- void LastFight () 
+ void LastFight (Player playerObj) 
  {
    cout << "\n I think that you have waited so much for this!" << endl;
    cout << "\n You were really brave!" << endl;
    cout << "\n You have done the quests and have the fight with the mobs!..." << endl;
    cout << "\n Now is the last turn. You will win or you will lose?" << endl;
-   //the last battle
+   Battle bt;
+   Item weapon;
+   bt.battle(playerObj.CharacterID, 10, weapon);
  }
 
 
