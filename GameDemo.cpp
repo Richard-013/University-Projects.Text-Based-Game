@@ -142,7 +142,6 @@ void gameFinale( Player &playerObj )
 	playerObj.checkpoint = 3;  // Sets the player's progress marker as 3, so they hav completed most the game
 	// Finale code here
 	playerObj.checkpoint = 4;  // Sets the player's progress marker as 4, they have completed the game
-	wantToSave( playerObj );
 }
 
 // Richard
