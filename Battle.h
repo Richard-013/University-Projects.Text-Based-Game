@@ -11,12 +11,13 @@ class Battle
 {
     public:
     int basic_attack(Player playerObj, Mob enemy, Item equipped);
-		int ability(Player playerObj, Mob enemy);
+		int abilityUse(Player playerObj, Mob enemy, int turn);
     int magic(Player playerObj, Mob enemy);
     void item();
     int enemyphase(Player playerObj, Mob enemy);
-    void battle(Player playerObj, Mob enemy, Item equipped);
+    void battle(int CharacterID, int MobID, Item equipped);
 		int main();
+    int turn;
 
     protected:
 

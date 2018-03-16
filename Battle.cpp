@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <string>
 #include <ctime>
-//include "ability-use.cpp"
+#include "ability-use.h"
 #include "Player.h"
 #include "Mob.h"
 #include "Item.h"
@@ -11,7 +11,7 @@
 
 using namespace std;
 
-
+int skipTurn, abilityDamage, poisoned, enraged;
 
 int Battle::basic_attack(Player playerObj, Mob enemy, Item equipped)
 {	  srand(time(NULL));
@@ -26,6 +26,11 @@ int Battle::basic_attack(Player playerObj, Mob enemy, Item equipped)
               {
                 cout << "Critical hit!" << endl;
                 incomingDamage *= 2;
+              }
+              if(enraged==1)
+              {
+                enraged = 0;
+                incomingDamage += enemy.getHP()%10;
               }
               cout << "You hit for " << incomingDamage << endl;
               return incomingDamage;
@@ -49,9 +54,10 @@ int Battle::basic_attack(Player playerObj, Mob enemy, Item equipped)
 	  }
 }
 
-int Battle::ability(Player playerObj, Mob enemy)
+int Battle::abilityUse(Player playerObj, Mob enemy, int turn)
 {
-  //ability.use(playerObj.classID);
+  int incomingDamage = useAbility(playerObj, enemy, turn);
+  return incomingDamage;
 }
 
 int Battle::magic(Player playerObj, Mob enemy)
@@ -63,7 +69,7 @@ int Battle::magic(Player playerObj, Mob enemy)
 			if(mageHitChance >= hit)
 			{
 				int incomingDamage = playerObj.intelligence*2;
-				cout << "Magic attack hits for "+incomingDamage << endl;
+				cout << "Magic attack hits for "<<incomingDamage << endl;
         return incomingDamage;
 			}
 			else
@@ -86,19 +92,16 @@ void Battle::item()
 
 int Battle::enemyphase(Player playerObj, Mob enemy)
 {
-  /*if(skipTurn==1)
+  if(skipTurn==1)
   {
+    skipTurn = 0;
     return 0;
-  }*/
+  }
   int hit = rand() % 100+1;
   int crit = rand() % 100+1;  
   if(enemy.getHitChance() >= hit)
   {
     int incomingDamage = enemy.getDmg() - playerObj.defence;
-    /*if(enraged == 1 or poisoned == 1)
-    {
-      incomingDamage = incomingDamage + bosshp%10;
-    }*/
     if(incomingDamage < 0) //Incoming damage cannot be negative
     {
       incomingDamage = 0;
@@ -121,47 +124,86 @@ int Battle::enemyphase(Player playerObj, Mob enemy)
 
 }
 
-void Battle::battle(Player playerObj, Mob enemy, Item equipped)
+void Battle::battle(int CharacterID, int MobID, Item equipped)
   //battle function takes player, mob and item objects as parameters
   //item object should be players equipped weapon
-{
-	int turn = 0;
+{ Player playerObj;
+  sqlite::sqlite db("RPGDatabase.db");
+  auto cur = db.get_statement();
+  cur->set_sql("select * from CharacterData where CharacterID = ?");
+  cur->prepare();
+  cur->bind(1, CharacterID);
+  cur->step();
+  playerObj.name = cur->get_text(1);
+  playerObj.classID = cur->get_int(2);
+  playerObj.level = cur->get_int(3);
+  playerObj.experience = cur->get_int(4);
+  playerObj.health = cur->get_int(5);
+  playerObj.remainingHealth = cur->get_int(6);
+  playerObj.attack = cur->get_int(7);
+  playerObj.defence = cur->get_int(8);
+  playerObj.intelligence = cur->get_int(9);
+  playerObj.perception = cur->get_int(10);
+  playerObj.dexterity = cur->get_int(11);
+  Mob enemy;
+  auto cur2 = db.get_statement();
+  cur2->set_sql("select * from Mobs where MobID = ?");
+  cur2->prepare();
+  cur2->bind(1, MobID);
+  cur2->step();
+  enemy.setName(cur2->get_text(1));
+  enemy.setLevel(cur2->get_int(2));
+  enemy.setArmor(cur2->get_int(3));
+  enemy.setHP(cur2->get_int(4));
+  enemy.setSpeed(cur2->get_int(5));
+  enemy.setDmg(cur2->get_int(6));
+  enemy.setHitChance(cur2->get_int(7));
+  enemy.setCritChance(cur2->get_int(8));
+  enemy.setRange(cur2->get_int(9));
+  int enemyHP = enemy.getHP();
+  int turn = 0;
+  printf("\033c");
   if(equipped.getSpeed() < enemy.getSpeed()) //Enemy has attack priority if they have higher speed
   {
     turn = 1;
   }
-  //passive();
-	cout << "Level " << enemy.getLevel() << " " << enemy.getName() << " appears!" << endl;
+  cout << " Level " << enemy.getLevel() << " " << enemy.getName() << " appears!" << endl;
   cout << "Select a battle option" << endl;
 	cout << "1 - Basic Attack" << endl;
 	cout << "2 - Ability" << endl;
 	cout << "3 - Magic" << endl;
 	cout << "4 - Item" << endl; //allows the player to select an option
-  int hp = playerObj.health;
-  int enemyhp = enemy.getHP();
-  while(hp > 0 && enemyhp > 0)
+  int hp = playerObj.remainingHealth;
+  while(hp > 0 && enemyHP > 0)
   {
+	
     while(turn % 2== 0)
   { //While it is the players turn:
     short choice;
     cin >> choice;
+    printf("\033c");
+    cout << " Select a battle option" << endl;
+    cout << "1 - Basic Attack" << endl;
+    cout << "2 - Ability" << endl;
+    cout << "3 - Magic" << endl;
+    cout << "4 - Item" << endl;
     switch (choice)
     {
     case 1:
     {
-      enemyhp = enemyhp - basic_attack(playerObj, enemy, equipped);
+      enemyHP = enemyHP - basic_attack(playerObj, enemy, equipped);
       ++turn;
       break;
     }
     case 2:
     {
-      enemyhp = enemyhp - ability(playerObj, enemy);
+      enemyHP = enemyHP - abilityUse(playerObj, enemy, turn);
       ++turn;
       break;
     }
     case 3:
     {
-      enemyhp = enemyhp - magic(playerObj, enemy);
+      enemyHP = enemyHP - magic(playerObj, enemy);
       ++turn;
       break;
     }
@@ -179,7 +221,7 @@ void Battle::battle(Player playerObj, Mob enemy, Item equipped)
     while(turn%2==1)
     {
       hp = hp - enemyphase(playerObj, enemy);
-      cout << "Your HP: " << hp << "                 " << "Enemy HP: " << enemyhp << endl;
+      cout << "Your HP: " << hp << "                 " << "Enemy HP: " << enemyHP << endl;
       ++turn;
     }
   }
@@ -188,11 +230,19 @@ void Battle::battle(Player playerObj, Mob enemy, Item equipped)
     cout << "You fought bravely, but you were overpowered and killed. " << endl;
     cout << "GAME OVER" << endl;
   }
-  if(enemyhp <= 0)
+  if(enemyHP <= 0)
   {
+    auto cur3 = db.get_statement();
+    cur3->set_sql("update CharacterData set CharacterRemainingHealth = ? where CharacterID = ?");
+    cur3->prepare();
+    cur3->bind(1, hp);
+    cur3->bind(2, CharacterID);
+    cur3->step();
     cout << "Your foe falls to the ground, lifeless." << endl;
     cout << "VICTORY!" << endl;
   }
+  
+  
 }
 
 
