@@ -24,8 +24,8 @@ void Quests::insertDetails(string qname, string qreward, int qpoints )
         cur->prepare();
         cur->bind(1,qname);
         //cur->bind(2,qnumber); It's a primary key
-        cur->bind(3,qreward);
-        cur->bind(4,qpoints);
+        cur->bind(2,qreward);
+        cur->bind(3,qpoints);
         cur->step();
        
  }
@@ -47,7 +47,7 @@ string Quests::getReward(int qnumber)  // Allows the player to load their progre
         sqlite::sqlite db( databaseFile );
         auto cur = db.get_statement();
 		
-        cur->set_sql( "SELECT * FROM QuestData WHERE QuestsNumber = ?");
+    cur->set_sql( "SELECT * FROM QuestData WHERE QuestsNumber = ?");
 		cur->prepare();
 		cur->bind(1,qnumber);
     cur->step();
@@ -61,5 +61,5 @@ string Quests::getReward(int qnumber)  // Allows the player to load their progre
    return qreward;
 }
 
-//void Quests::setIsDone(string qname, int )
+
 
