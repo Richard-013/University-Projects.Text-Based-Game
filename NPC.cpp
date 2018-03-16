@@ -288,6 +288,8 @@ string NPC::NPCmeeting(int NPCID)
     item = getItem(NPCID);
     duelPhrase = getDuelPhrase(NPCID);
     battleReward = getBattleReward(NPCID);
+    health = getHealth(NPCID);
+    damage =getDamage(NPCID);
     
    
     meetingMessage = "You're wondering through the "+zone+" zone. You've met "+name+ ".";
