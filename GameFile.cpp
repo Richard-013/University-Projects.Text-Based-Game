@@ -56,8 +56,7 @@ int main()  // Main function that runs the game
 			if( answer == 1 )
 			{
 				// If the player starts a new game then this will launch the whole game from the start
-				runWholeGame( playerObj );
-			}
+				// from the start when it hits the switch statement below as the default value for the player's checkpoint is 0			}
 			else if( answer == 2 )
 			{
 				// Loads player data
