@@ -1,10 +1,10 @@
 #include <iostream>
 #include <stdexcept>
 #include "libsqlite.hpp"
-//#include "battle.h"
+#include "Battle.h"
 #include "Introduction.h"
-//#include "Item.h"
-//#include "Mob.h"
+#include "Item.h"
+#include "Mob.h"
 #include "Player.h"
 #include "SaveProgress.h"
 
@@ -55,8 +55,9 @@ int main()  // Main function that runs the game
 
 			if( answer == 1 )
 			{
-				// If the player starts a new game then this will launch the whole game from the start
-				// from the start when it hits the switch statement below as the default value for the player's checkpoint is 0			}
+				// If the player starts a new game then this will allow the game loop to continue whilst recognising valid input as the game will begin
+				// from the start when it hits the switch statement below as the default value for the player's checkpoint is 0
+			}
 			else if( answer == 2 )
 			{
 				// Loads player data
@@ -103,12 +104,12 @@ int main()  // Main function that runs the game
 					runWholeGame( playerObj );
 					runGame = false;
 					break;
-				case 1:  // Runs the game from part 2
+				case 1:
 					gameStart( playerObj );
 					gameFinale( playerObj );
 					runGame = false;
 					break;
-				case 2:  // Runs the game from part 3
+				case 2:
 					gameFinale( playerObj );
 					runGame = false;
 					break;
@@ -176,8 +177,10 @@ void wantToSave(Player &playerObj)
 		cout << endl << "Your characterID is " << playerObj.characterID << endl;
 		cout << "Please remember this in order to load your progress at a later date" << endl;
 	}
-	else if( answer == 1 && playerObj.firstTimeSaving != true )
+	else // if( answer == 1 && playerObj.firstTimeSaving != true )
 	{
-		saveProg.save( playerObj );
+		int playerID = playerObj.characterID;
+		saveProg.firstSave( playerObj );
+		cout << endl << "Save successful, data for character " << playerID << " has been updated" << endl;
 	}
 }
