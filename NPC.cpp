@@ -347,7 +347,7 @@ void NPC::NPCmeetingChoice(int MOBID)//always after NPCmeeting
             case 3:
             {
                 cout<<"The items are: "<<endl;
-                cout<<getItem(int NPCID);
+                cout<<getItem(NPCID);
                 break;
             }
         
