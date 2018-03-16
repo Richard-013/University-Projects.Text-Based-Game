@@ -3,21 +3,20 @@
 #include "libsqlite.hpp"
 #include "SaveProgress.h"
 #include "Player.h"
-#include "Battle.h"
-#include "Item.h"
-#include "Mob.h"
+//#include "Battle.h"
+//#include "Item.h"
+//#include "Mob.h"
 #include "Introduction.h"
 #include "Player.h"
-#include "ability-use.h"
+//#include "ability-use.h"
 using namespace std;
 
 int main()
 {
-    /*string sqliteFile = "RPGDatabase.db";
+    string sqliteFile = "RPGDatabase.db";
 
     try
     {
-		/*
         sqlite::sqlite db( sqliteFile );
         auto cur = db.get_statement();
         
@@ -62,15 +61,5 @@ int main()
     {
         cerr << e.what() << endl;
         return 1;
-    }*/
-    
-    //SaveProgress sp;
-    //sp.firstSave();
-    Battle bt;
-    Player testguy;
-    Item sword;
-    bt.battle(16, 5, sword);
-    return 0;
-    //Introduction intro;
-    //intro.chooseName();
+    }
 }
